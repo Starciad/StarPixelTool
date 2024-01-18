@@ -7,54 +7,84 @@ using System.IO;
 
 namespace SPT.Core
 {
-    public sealed class SPTPixelator : IDisposable
+    /// <summary>
+    ///
+    /// </summary>
+    /// <remarks>
+    ///
+    /// </remarks>
+    /// <param name="inputFile"></param>
+    /// <param name="outputFile"></param>
+    public sealed class SPTPixelator(FileStream inputFile, FileStream outputFile) : IDisposable
     {
-        private readonly FileStream fileInput;
-        private readonly FileStream fileOutput;
+        /// <summary>
+        ///
+        /// </summary>
+        public required int PixelateFactor
+        {
+            get => this.pixelateFactor;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), "Pixelate factor must be greater than 0.");
+                }
 
-        private readonly SKBitmap bitmapInput;
-        private readonly SKBitmap bitmapOutput;
+                this.pixelateFactor = value;
+            }
+        }
 
-        private readonly int widthInput;
-        private readonly int widthOutput;
+        private SKBitmap bitmapInput;
+        private SKBitmap bitmapOutput;
 
-        private readonly int heightInput;
-        private readonly int heightOutput;
-
-        private readonly int pixelScale;
+        private int widthInput;
+        private int widthOutput;
+        private int heightInput;
+        private int heightOutput;
 
         private bool disposedValue;
 
-        public SPTPixelator(FileStream inputFile, FileStream outputFile, int pixelScale)
+        private int pixelateFactor;
+
+        #region System
+        /// <summary>
+        /// Initializes the pixelation process on the input image, creating a pixelated version.
+        /// </summary>
+        public void InitializePixelation()
         {
-            this.fileInput = inputFile;
-            this.fileOutput = outputFile;
+            InitializeFiles();
+            StartPixelationProcess();
+        }
 
-            this.pixelScale = pixelScale;
+        /// <summary>
+        /// Exports the pixelated image to the specified output file.
+        /// </summary>
+        /// <exception cref="IOException">Thrown if the export operation fails. Check the output file path and try again.</exception>
+        public void ExportPixelatedImage()
+        {
+            if (!this.bitmapOutput.Encode(outputFile, SKEncodedImageFormat.Png, default))
+            {
+                throw new IOException("Failed to export the pixelated image. Check the output file path and try again.");
+            }
+        }
+        #endregion
 
-            this.bitmapInput = SKBitmap.Decode(this.fileInput);
+        #region Processing
+        private void InitializeFiles()
+        {
+            this.bitmapInput = SKBitmap.Decode(inputFile);
             this.widthInput = this.bitmapInput.Width;
             this.heightInput = this.bitmapInput.Height;
 
-            this.widthOutput = this.widthInput / pixelScale;
-            this.heightOutput = this.heightInput / pixelScale;
+            this.widthOutput = this.widthInput / this.pixelateFactor;
+            this.heightOutput = this.heightInput / this.pixelateFactor;
             this.bitmapOutput = new SKBitmap(this.widthOutput, this.heightOutput);
         }
-
-        // ================================= //
-
-        public void Start()
+        private void StartPixelationProcess()
         {
-            ApplyPixelEffects();
+            ApplyPixelation();
         }
-        public void Save()
-        {
-            _ = this.bitmapOutput.Encode(this.fileOutput, SKEncodedImageFormat.Png, default);
-        }
-
-        // ================================= //
-
-        private void ApplyPixelEffects()
+        private void ApplyPixelation()
         {
             int inputPosX = 0;
             int inputPosY = 0;
@@ -66,16 +96,16 @@ namespace SPT.Core
                     SKColor color = this.bitmapInput.GetAverageColorInArea(inputPosX, inputPosY, 3);
 
                     this.bitmapOutput.SetPixel(x, y, color);
-                    inputPosX += this.pixelScale;
+                    inputPosX += this.pixelateFactor;
                 }
 
                 inputPosX = 0;
-                inputPosY += this.pixelScale;
+                inputPosY += this.pixelateFactor;
             }
         }
+        #endregion
 
-        // ================================= //
-
+        #region Dispose
         private void Dispose(bool disposing)
         {
             if (!this.disposedValue)
@@ -85,8 +115,8 @@ namespace SPT.Core
                     ((IDisposable)this.bitmapInput).Dispose();
                     ((IDisposable)this.bitmapOutput).Dispose();
 
-                    this.fileInput.Close();
-                    this.fileOutput.Close();
+                    inputFile.Close();
+                    outputFile.Close();
                 }
 
                 this.disposedValue = true;
@@ -97,5 +127,6 @@ namespace SPT.Core
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
+        #endregion
     }
 }
