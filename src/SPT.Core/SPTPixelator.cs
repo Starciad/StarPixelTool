@@ -1,13 +1,13 @@
 ﻿using SkiaSharp;
 
-using SPT.Extensions;
+using SPT.Core.Extensions;
 
 using System;
 using System.IO;
 
-namespace SPT
+namespace SPT.Core
 {
-    internal sealed class PixelArtConverter : IDisposable
+    public sealed class SPTPixelator : IDisposable
     {
         private readonly FileStream fileInput;
         private readonly FileStream fileOutput;
@@ -22,17 +22,15 @@ namespace SPT
         private readonly int heightOutput;
 
         private readonly int pixelScale;
-        //private readonly int tolerance;
 
         private bool disposedValue;
 
-        internal PixelArtConverter(FileInfo inputFile, FileInfo outputFile, int pixelScale, int tolerance)
+        public SPTPixelator(FileStream inputFile, FileStream outputFile, int pixelScale)
         {
-            this.fileInput = inputFile.Open(FileMode.Open);
-            this.fileOutput = outputFile.Open(FileMode.OpenOrCreate);
+            this.fileInput = inputFile;
+            this.fileOutput = outputFile;
 
             this.pixelScale = pixelScale;
-            // this.tolerance = tolerance;
 
             this.bitmapInput = SKBitmap.Decode(this.fileInput);
             this.widthInput = this.bitmapInput.Width;
@@ -45,11 +43,11 @@ namespace SPT
 
         // ================================= //
 
-        internal void Start()
+        public void Start()
         {
             ApplyPixelEffects();
         }
-        internal void Export()
+        public void Save()
         {
             _ = this.bitmapOutput.Encode(this.fileOutput, SKEncodedImageFormat.Png, default);
         }

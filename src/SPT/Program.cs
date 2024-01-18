@@ -2,6 +2,8 @@
 using System.CommandLine;
 using System.IO;
 
+using SPT.Core;
+
 namespace SPT
 {
     internal static class Program
@@ -30,12 +32,6 @@ namespace SPT
             );
             pixelScaleOption.AddAlias("-s");
 
-            Option<int> toleranceOption = new(
-                name: "--tolerance",
-                description: "Tolerance level for color blending. Reduces color variation in the output. (0 to 255)"
-            );
-            toleranceOption.AddAlias("-t");
-
             // =================================== //
 
             RootCommand rootCommand = new("Transform images into Pixel Art with various filters and effects.")
@@ -43,17 +39,16 @@ namespace SPT
                 inputFileOption,
                 outputFileOption,
                 pixelScaleOption,
-                toleranceOption,
             };
 
-            rootCommand.SetHandler((FileInfo input, FileInfo output, int pixelScale, int tolerance) =>
+            rootCommand.SetHandler((FileInfo input, FileInfo output, int pixelScale) =>
             {
-                using PixelArtConverter converter = new(input, output, pixelScale, tolerance);
+                using SPTPixelator pixalator = new(input.Open(FileMode.Open, FileAccess.Read), output.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite), pixelScale);
 
-                converter.Start();
-                converter.Export();
+                pixalator.Start();
+                pixalator.Save();
 
-            }, inputFileOption, outputFileOption, pixelScaleOption, toleranceOption);
+            }, inputFileOption, outputFileOption, pixelScaleOption);
 
             return rootCommand.Invoke(args);
         }

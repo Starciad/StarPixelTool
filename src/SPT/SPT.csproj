@@ -1,18 +1,71 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!-- HEADER -->
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net8.0</TargetFramework>
-		<ImplicitUsings>disable</ImplicitUsings>
+	</PropertyGroup>
+
+	<!-- GENERAL -->
+	<PropertyGroup>
+		<RootNamespace>SPT</RootNamespace>
 		<Nullable>disable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<InvariantGlobalization>true</InvariantGlobalization>
 	</PropertyGroup>
 
+	<!-- PUBLISH -->
+	<PropertyGroup>
+		<PublishTrimmed>false</PublishTrimmed>
+		<PublishSingleFile>false</PublishSingleFile>
+		<PublishAot>false</PublishAot>
+		<PublishReadyToRun>false</PublishReadyToRun>
+		<TieredCompilation>true</TieredCompilation>
+		<UseWindowsForms>false</UseWindowsForms>
+		<UseWPF>false</UseWPF>
+		<StartupObject>SPT.Program</StartupObject>
+		<ApplicationIcon>SPT_Icon.ico</ApplicationIcon>
+		<Trimming>full</Trimming>
+	</PropertyGroup>
+
+	<!-- COMPILATION -->
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>embedded</DebugType>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>embedded</DebugType>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	</PropertyGroup>
+
+	<!-- SETTINGS -->
 	<ItemGroup>
-		<PackageReference Include="SkiaSharp" Version="2.88.7" />
-		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.7" />
-		<PackageReference Include="SkiaSharp.NativeAssets.macOS" Version="2.88.7" />
-		<PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="2.88.7" />
+		<Content Include="SPT_Icon.ico" />
+	</ItemGroup>
+
+	<!-- FILES -->
+	<ItemGroup>
+		<None Include="..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<!-- DEPENDENCIES -->
+	<ItemGroup>
 		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
 		<PackageReference Include="System.CommandLine.Rendering" Version="0.4.0-alpha.22272.1" />
+	</ItemGroup>
+
+	<!-- PROJECTS -->
+	<ItemGroup>
+		<ProjectReference Include="..\SPT.Core\SPT.Core.csproj" />
 	</ItemGroup>
 </Project>

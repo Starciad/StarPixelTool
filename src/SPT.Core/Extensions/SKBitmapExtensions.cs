@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace SPT.Extensions
+namespace SPT.Core.Extensions
 {
     internal static class SKBitmapExtensions
     {
@@ -16,7 +16,7 @@ namespace SPT.Extensions
                     int xPivot = x + i;
                     int yPivot = y + j;
 
-                    if (IsWithinBitmapBounds(bitmap, xPivot, yPivot))
+                    if (bitmap.IsWithinBitmapBounds(xPivot, yPivot))
                     {
                         SKColor pixelColor = bitmap.GetPixel(xPivot, yPivot);
                         totalR += pixelColor.Red;

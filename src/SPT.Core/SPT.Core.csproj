@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!-- HEADER -->
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+
+	<!-- GENERAL -->
+	<PropertyGroup>
+		<RootNamespace>SPT.Core</RootNamespace>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<InvariantGlobalization>true</InvariantGlobalization>
+	</PropertyGroup>
+
+	<!-- INFORMATIONS -->
+	<PropertyGroup>
+		<Title>StarPixelTool</Title>
+		<Version>1.0.0.0</Version>
+		<Authors>Starciad</Authors>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/Starciad/StarPixelTool.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<NeutralLanguage>es-US</NeutralLanguage>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Description>A tool for transforming and pixelating images.</Description>
+		<PackageProjectUrl>https://github.com/Starciad/StarPixelTool</PackageProjectUrl>
+		<PackageTags>api; pixel-art; graphics; image-processing; dotnet-core;</PackageTags>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<IncludeSymbols>True</IncludeSymbols>
+		<PackageIcon>SPT_Icon.png</PackageIcon>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>embedded</DebugType>
+		<IsTrimmable>True</IsTrimmable>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>embedded</DebugType>
+		<IsTrimmable>True</IsTrimmable>
+	</PropertyGroup>
+
+	<!-- ASSETS -->
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\LICENSE.txt">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\Assets\SPT_Icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<!-- DEPENDENCIES -->
+	<ItemGroup>
+		<PackageReference Include="SkiaSharp" Version="2.88.7" />
+		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.7" />
+		<PackageReference Include="SkiaSharp.NativeAssets.macOS" Version="2.88.7" />
+		<PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="2.88.7" />
+	</ItemGroup>
+</Project>
