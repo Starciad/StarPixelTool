@@ -17,9 +17,9 @@
 	<!-- PUBLISH -->
 	<PropertyGroup>
 		<PublishTrimmed>false</PublishTrimmed>
-		<PublishSingleFile>false</PublishSingleFile>
+		<PublishSingleFile>true</PublishSingleFile>
 		<PublishAot>false</PublishAot>
-		<PublishReadyToRun>false</PublishReadyToRun>
+		<PublishReadyToRun>true</PublishReadyToRun>
 		<TieredCompilation>true</TieredCompilation>
 		<UseWindowsForms>false</UseWindowsForms>
 		<UseWPF>false</UseWPF>
