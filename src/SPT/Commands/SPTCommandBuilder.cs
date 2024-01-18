@@ -1,11 +1,17 @@
-﻿using SPT.Core;
+﻿using Figgle;
+
+using SPT.Core;
+using SPT.Core.Constants;
 using SPT.Core.IO;
+using SPT.Terminal;
 
 using System;
 using System.CommandLine;
 using System.CommandLine.Parsing;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace SPT.Commands
 {
@@ -116,8 +122,73 @@ namespace SPT.Commands
                 PixelateFactor = pixelateFactor,
             };
 
+            // Infos
+            Stopwatch processStopwatch = new();
+            processStopwatch.Start();
+
+            // Special
+            string line = new('-', Console.WindowWidth - 1);
+
+            // Title
+            Console.WriteLine(line);
+            SPTTerminal.ApplyColorGradient(new(FiggleFonts.Swampland.Render(SPTProjectConstants.Name)));
+            SPTTerminal.BreakLine();
+            SPTTerminal.ApplyColor(ConsoleColor.Yellow, $"v{SPTProjectConstants.Version}");
+            SPTTerminal.ApplyColor(ConsoleColor.Cyan, $" - {SPTProjectConstants.Name} - (c) Starciad <davilsfernandes.starciad.comu@gmail.com>");
+            SPTTerminal.BreakLine();
+            Console.WriteLine(line);
+
+            // Process
+            SPTTerminal.BreakLine();
+            SPTTerminal.ApplyColor(ConsoleColor.Gray, "╔─━━━━━━░★░━━━━━━─╗");
+            SPTTerminal.BreakLine();
+            SPTTerminal.BreakLine();
+            SPTTerminal.ApplyColor(ConsoleColor.Blue, "PROCESSING");
+            SPTTerminal.BreakLine();
+
+            DisplayProcessingStep("Preparing application.");
+            DisplayProcessingStep("Starting the pixelization process.");
+
+            #region [ PIXALATOR ]
             pixalator.InitializePixelation();
             pixalator.ExportPixelatedImage();
+            #endregion
+
+            SPTTerminal.BreakLine();
+            SPTTerminal.ApplyColor(ConsoleColor.Gray, "╚─━━━━━━░★░━━━━━━─╝");
+            SPTTerminal.BreakLine();
+
+            // Finish
+            processStopwatch.Stop();
+
+            SPTTerminal.BreakLine();
+            SPTTerminal.ApplyColor(ConsoleColor.Gray, "╔─━━━━━━░★░━━━━━━─╗");
+            SPTTerminal.BreakLine();
+            SPTTerminal.BreakLine();
+            SPTTerminal.ApplyColor(ConsoleColor.Yellow, "STATS");
+            SPTTerminal.BreakLine();
+
+            DisplayFinishDetail("Runtime", $"{processStopwatch.Elapsed.TotalSeconds}s");
+            DisplayFinishDetail("Input filename", inputFilename);
+            DisplayFinishDetail("Output filename", outputFilename);
+
+            SPTTerminal.BreakLine();
+            SPTTerminal.ApplyColor(ConsoleColor.Gray, "╚─━━━━━━░★░━━━━━━─╝");
+            SPTTerminal.BreakLine();
+            SPTTerminal.BreakLine();
+        }
+
+        private static void DisplayProcessingStep(string step)
+        {
+            SPTTerminal.ApplyColor(ConsoleColor.Green, "[•] ");
+            Console.WriteLine(step);
+        }
+
+        private static void DisplayFinishDetail(string label, string value)
+        {
+            SPTTerminal.ApplyColor(ConsoleColor.Green, "[•] ");
+            SPTTerminal.ApplyColor(ConsoleColor.White, $"{label}: ");
+            Console.WriteLine(value);
         }
     }
 }
