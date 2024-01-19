@@ -1,0 +1,41 @@
+===============================================================================
+                        Hardware Palettes Information
+===============================================================================
+
+**Name:** harware-palettes
+**Display Name:** Hardware Palettes
+**Description:** Well-known palettes from old computer hardware
+**Version:** 1.0
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- Apple II: [./apple-ii.gpl](./apple-ii.gpl)
+- Atari 2600 NTSC: [./atari2600-ntsc.gpl](./atari2600-ntsc.gpl)
+- Atari 2600 PAL: [./atari2600-pal.gpl](./atari2600-pal.gpl)
+- CGA: [./cga.gpl](./cga.gpl)
+- CGA0: [./cga0.gpl](./cga0.gpl)
+- CGA0 High: [./cga0hi.gpl](./cga0hi.gpl)
+- CGA1: [./cga1.gpl](./cga1.gpl)
+- CGA1 High: [./cga1hi.gpl](./cga1hi.gpl)
+- CGA3rd: [./cga3rd.gpl](./cga3rd.gpl)
+- CGA3rd High: [./cga3rdhi.gpl](./cga3rdhi.gpl)
+- Commodore Plus/4: [./commodore-plus4.gpl](./commodore-plus4.gpl)
+- Commodore VIC-20: [./commodore-vic20.gpl](./commodore-vic20.gpl)
+- Commodore 64: [./commodore64.gpl](./commodore64.gpl)
+- CPC: [./cpc.gpl](./cpc.gpl)
+- Game Boy: [./gameboy.gpl](./gameboy.gpl)
+- Game Boy Color Type1: [./gameboy-color-type1.gpl](./gameboy-color-type1.gpl)
+- Master System: [./master-system.gpl](./master-system.gpl)
+- MSX1: [./msx1.gpl](./msx1.gpl)
+- MSX2: [./msx2.gpl](./msx2.gpl)
+- NES: [./nes.gpl](./nes.gpl)
+- NES NTSC: [./nes-ntsc.gpl](./nes-ntsc.gpl)
+- Teletext: [./teletext.gpl](./teletext.gpl)
+- VGA 13h: [./vga-13h.gpl](./vga-13h.gpl)
+- Virtual Boy: [./virtualboy.gpl](./virtualboy.gpl)
+- ZX Spectrum: [./zx-spectrum.gpl](./zx-spectrum.gpl)
+
+===============================================================================

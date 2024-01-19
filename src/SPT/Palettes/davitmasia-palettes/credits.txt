@@ -1,0 +1,24 @@
+===============================================================================
+                        Davit Masia Palettes Information
+===============================================================================
+
+**Name:** davitmasia-palettes
+**Display Name:** Davit Masia Palettes
+**Description:** Palettes contributed by Davit Masia
+**Version:** 1.0
+**Author:** [Davit Masia](https://twitter.com/DavitMasia)
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- Matriax8c: [./matriax8c.gpl](./matriax8c.gpl)
+
+===============================================================================
+                    Credits to the Palette Contributor
+===============================================================================
+
+The palette in this collection was contributed by [Davit Masia](https://twitter.com/DavitMasia). Show appreciation to the contributor for their contribution to these palettes!
+
+===============================================================================

@@ -1,0 +1,30 @@
+===============================================================================
+                          Software Palettes Information
+===============================================================================
+
+**Name:** software-palettes
+**Display Name:** Software Palettes
+**Description:** Well-known palettes from software developers
+**Version:** 1.0
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- Google UI: [./google-ui.gpl](./google-ui.gpl)
+- Minecraft: [./minecraft.gpl](./minecraft.gpl)
+- Monokai: [./monokai.gpl](./monokai.gpl)
+- SmileBASIC: [./smile-basic.gpl](./smile-basic.gpl)
+- Solarized: [./solarized.gpl](./solarized.gpl)
+- Web Safe Colors: [./web-safe-colors.gpl](./web-safe-colors.gpl)
+- Win16: [./win16.gpl](./win16.gpl)
+- X11: [./x11.gpl](./x11.gpl)
+
+===============================================================================
+                    Credits to the Software Developers
+===============================================================================
+
+The palettes in this collection are well-known palettes from various software developers. Show appreciation to the developers for these influential and widely used color schemes!
+
+===============================================================================

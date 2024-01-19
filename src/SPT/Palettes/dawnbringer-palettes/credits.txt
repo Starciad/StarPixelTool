@@ -1,0 +1,25 @@
+===============================================================================
+          Richard "DawnBringer" Fhager Palettes Information
+===============================================================================
+
+**Name:** dawnbringer-palettes
+**Display Name:** Richard "DawnBringer" Fhager Palettes
+**Description:** Palettes created by Richard "DawnBringer" Fhager
+**Version:** 1.0
+**Author:** [Richard Fhager](http://hem.fyristorg.com/dawnbringer/)
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- DB16: [./db16.gpl](./db16.gpl)
+- DB32: [./db32.gpl](./db32.gpl)
+
+===============================================================================
+                    Credits to the Palette Creator
+===============================================================================
+
+The palettes in this collection were created by [Richard "DawnBringer" Fhager](http://hem.fyristorg.com/dawnbringer/). Acknowledge the creator for their artistic contribution to these palettes!
+
+===============================================================================

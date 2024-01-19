@@ -3,6 +3,7 @@
 using SPT.Core.Colors;
 
 using System;
+using System.IO;
 
 namespace SPT.Core.Palette
 {
@@ -68,6 +69,18 @@ namespace SPT.Core.Palette
 
                 return closestColor;
             }
+        }
+
+        public static SPTPalette FromFile(string path)
+        {
+            if (!File.Exists(path))
+            {
+                throw new Exception("");
+            }
+
+
+
+            return default;
         }
     }
 }

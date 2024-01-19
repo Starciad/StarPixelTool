@@ -1,0 +1,24 @@
+===============================================================================
+                           Hyohnoo Palettes Information
+===============================================================================
+
+**Name:** hyohnoo-palettes
+**Display Name:** Hyohnoo Palettes
+**Description:** Palettes contributed by Hyohnoo
+**Version:** 1.0
+**Author:** [Hyohnoo](https://twitter.com/Hyohnoo)
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- mail24: [./mail24.gpl](./mail24.gpl)
+
+===============================================================================
+                     Credits to the Palette Contributor
+===============================================================================
+
+The palette in this collection was contributed by [Hyohnoo](https://twitter.com/Hyohnoo). Acknowledge the contributor for their valuable contribution to the palette collection!
+
+===============================================================================

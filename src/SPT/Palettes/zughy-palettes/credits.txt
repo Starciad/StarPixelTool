@@ -1,0 +1,24 @@
+===============================================================================
+                          Zughy Palettes Information
+===============================================================================
+
+**Name:** zughy-palettes
+**Display Name:** Zughy Palettes
+**Description:** Palettes contributed by Zughy
+**Version:** 1.0
+**Author:** [Zughy](https://twitter.com/_Zughy)
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- Zughy-32: [./zughy-32.gpl](./zughy-32.gpl)
+
+===============================================================================
+                  Credits to the Palette Contributor
+===============================================================================
+
+The palette in this collection was contributed by [Zughy](https://twitter.com/_Zughy). Acknowledge the contributor for their creative contribution to the palette collection!
+
+===============================================================================

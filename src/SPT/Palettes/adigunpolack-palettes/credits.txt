@@ -1,0 +1,27 @@
+===============================================================================
+                    Adigun A. Polack Palettes Information
+===============================================================================
+
+**Name:** adigunpolack-palettes
+**Display Name:** Adigun A. Polack Palettes
+**Description:** Palettes created by Adigun A. Polack
+**Version:** 1.0
+**Author:** [Adigun A. Polack](https://twitter.com/AdigunPolack)
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- AAP-64: [./aap-64.gpl](./aap-64.gpl)
+- AAP-Micro12: [./aap-micro12.gpl](./aap-micro12.gpl)
+- AAP-Splendor128: [./aap-splendor128.gpl](./aap-splendor128.gpl)
+- AAP-RadiantXV: [./aap-radiantxv.gpl](./aap-radiantxv.gpl)
+- SimpleJPC-16: [./simplejpc-16.gpl](./simplejpc-16.gpl)
+
+===============================================================================
+                        Credits to the Palette Creator
+===============================================================================
+
+The palettes in this collection were created by [Adigun A. Polack](https://twitter.com/AdigunPolack). Show your appreciation to the creator for their artistic contribution!
+

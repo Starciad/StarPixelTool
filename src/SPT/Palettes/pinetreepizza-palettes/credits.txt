@@ -1,0 +1,25 @@
+===============================================================================
+                     PineTreePizza Palettes Information
+===============================================================================
+
+**Name:** pinetreepizza-palettes
+**Display Name:** PineTreePizza Palettes
+**Description:** Palettes contributed by PineTreePizza
+**Version:** 1.0
+**Author:** [PineTreePizza](https://twitter.com/PineTreePizza)
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- BubbleGum16: [./bubblegum-16.gpl](./bubblegum-16.gpl)
+- Rosy-42: [./rosy-42.gpl](./rosy-42.gpl)
+
+===============================================================================
+                  Credits to the Palette Contributor
+===============================================================================
+
+The palettes in this collection were contributed by [PineTreePizza](https://twitter.com/PineTreePizza). Acknowledge the contributor for their creative contributions to the palette collection!
+
+===============================================================================

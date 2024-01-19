@@ -1,0 +1,24 @@
+===============================================================================
+                   Javier Guerrero Palettes Information
+===============================================================================
+
+**Name:** javierguerrero-palettes
+**Display Name:** Javier Guerrero Palettes
+**Description:** Palettes contributed by Javier Guerrero
+**Version:** 1.0
+**Author:** [Javier Guerrero](https://twitter.com/Xavier_Gd)
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- nyx8: [./nyx8.gpl](./nyx8.gpl)
+
+===============================================================================
+                    Credits to the Palette Contributor
+===============================================================================
+
+The palette in this collection was contributed by [Javier Guerrero](https://twitter.com/Xavier_Gd). Acknowledge the contributor for their valuable contribution to the palette collection!
+
+===============================================================================

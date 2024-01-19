@@ -1,0 +1,31 @@
+===============================================================================
+                Arne Niklas Jansson Palettes Information
+===============================================================================
+
+**Name:** arne-palettes
+**Display Name:** Arne Niklas Jansson Palettes
+**Version:** 1.0
+**Author:** [Arne Niklas Jansson](https://androidarts.com/)
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- A64: [./a64.gpl](./a64.gpl)
+- ARNE16: [./arne16.gpl](./arne16.gpl)
+- ARNE32: [./arne32.gpl](./arne32.gpl)
+- CGArne: [./cg-arne.gpl](./cg-arne.gpl)
+- Copper Tech: [./copper-tech.gpl](./copper-tech.gpl)
+- CPC Boy: [./cpc-boy.gpl](./cpc-boy.gpl)
+- Eroge Copper: [./eroge-copper.gpl](./eroge-copper.gpl)
+- JMP: [./jmp.gpl](./jmp.gpl)
+- Psygnosia: [./psygnosia.gpl](./psygnosia.gpl)
+
+===============================================================================
+                    Credits to the Palette Creator
+===============================================================================
+
+The palettes in this collection were created by [Arne Niklas Jansson](https://androidarts.com/). Acknowledge the creator for their artistic contribution to these palettes!
+
+===============================================================================

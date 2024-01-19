@@ -1,0 +1,31 @@
+===============================================================================
+                   ENDESGA Studios Palettes Information
+===============================================================================
+
+**Name:** endesga-palettes
+**Display Name:** ENDESGA Studios Palettes
+**Description:** Palettes contributed by ENDESGA Studios
+**Version:** 1.0
+**Author:** [ENDESGA Studios](https://twitter.com/ENDESGA)
+**Publisher:** aseprite
+
+**Categories:**
+- Palettes
+
+**Contributions:**
+- ARQ4: [./arq4.gpl](./arq4.gpl)
+- ARQ16: [./arq16.gpl](./arq16.gpl)
+- EDG16: [./edg16.gpl](./edg16.gpl)
+- EDG32: [./edg32.gpl](./edg32.gpl)
+- EDG8: [./edg8.gpl](./edg8.gpl)
+- EN4: [./en4.gpl](./en4.gpl)
+- ENOS16: [./enos16.gpl](./enos16.gpl)
+- HEPT32: [./hept32.gpl](./hept32.gpl)
+
+===============================================================================
+                  Credits to the Palette Contributor
+===============================================================================
+
+The palettes in this collection were contributed by [ENDESGA Studios](https://twitter.com/ENDESGA). Show appreciation to the contributor for their creative contribution to these palettes!
+
+===============================================================================
