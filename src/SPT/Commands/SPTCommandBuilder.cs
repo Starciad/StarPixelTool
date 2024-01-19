@@ -22,7 +22,7 @@ namespace SPT.Commands
             Option<string> outputFilenameOption = new(name: "--output", description: "Specifies the output file for the pixelated image.");
             Option<int> pixelateFactorOption = new(name: "--pixelateFactor", description: "Specifies the pixelate factor for the pixelation transformation. Must be a value greater than 0.");
             Option<int> paletteSizeOption = new(name: "--paletteSize", description: "Specifies a range of colors that the resulting image will have. When selecting a custom palette, this field will automatically be filled with the number of colors the palette has. Must be a value greater than 0.");
-            Option<int> colorToleranceOption = new(name: "--colorTolerance", description: "Specifies the tolerance value for the blending and unification of nearby colors during the file pixalization process. Must be an integer numeric value between 0 and 255.");
+            Option<int> colorToleranceOption = new(name: "--tolerance", description: "Specifies the tolerance value for the blending and unification of nearby colors during the file pixalization process. Must be an integer numeric value between 0 and 255.");
 
             inputFilenameOption.IsRequired = true;
             outputFilenameOption.IsRequired = true;

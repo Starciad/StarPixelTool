@@ -112,7 +112,7 @@ namespace SPT.Core
         /// </summary>
         public void InitializePixelation()
         {
-            InitializePixelator();
+            StartPixelatorSystem();
             StartPixelationProcess();
         }
 
@@ -130,7 +130,7 @@ namespace SPT.Core
         #endregion
 
         #region Processing
-        private void InitializePixelator()
+        private void StartPixelatorSystem()
         {
             // Files
             this.bitmapInput = SKBitmap.Decode(inputFile);
@@ -142,7 +142,7 @@ namespace SPT.Core
             this.bitmapOutput = new SKBitmap(this.widthOutput, this.heightOutput);
 
             // Settings
-            if (this.customPalette != null || !this.customPalette.IsEmpty)
+            if (this.customPalette != null)
             {
                 this.paletteSize = this.customPalette.Size;
             }
