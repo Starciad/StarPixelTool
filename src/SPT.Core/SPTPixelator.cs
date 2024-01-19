@@ -72,6 +72,23 @@ namespace SPT.Core
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        public double ColorTolerance
+        {
+            get => this.colorTolerance;
+            set
+            {
+                if (value < 0 || value > 255)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), "The color tolerance value must be a numeric value between 0 and 255.");
+                }
+
+                this.colorTolerance = value;
+            }
+        }
+
         private SKBitmap bitmapInput;
         private SKBitmap bitmapOutput;
 
@@ -85,7 +102,7 @@ namespace SPT.Core
         private int pixelateFactor;
         private int paletteSize;
         private SPTPalette customPalette;
-        private readonly double colorTolerance;
+        private double colorTolerance;
 
         private SKColor[] bitmapOutputColors;
 
