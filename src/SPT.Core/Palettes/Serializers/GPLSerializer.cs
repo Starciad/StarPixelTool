@@ -46,7 +46,7 @@ namespace SPT.Core.Palettes.Serializers
 
             foreach (string line in lines)
             {
-                if (line.StartsWith("GIMP Palette") || line.StartsWith('#'))
+                if (line.StartsWith("GIMP Palette") || line.StartsWith('#') || line.StartsWith("Name") || line.StartsWith("Columns"))
                 {
                     continue;
                 }
