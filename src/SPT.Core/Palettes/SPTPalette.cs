@@ -5,7 +5,7 @@ using SPT.Core.Colors;
 using System;
 using System.IO;
 
-namespace SPT.Core.Palette
+namespace SPT.Core.Palettes
 {
     /// <summary>
     /// Represents a color palette.

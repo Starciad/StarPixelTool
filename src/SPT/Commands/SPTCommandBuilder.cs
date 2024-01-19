@@ -3,6 +3,7 @@
 using SPT.Core;
 using SPT.Core.Constants;
 using SPT.Core.IO;
+using SPT.Core.Palettes.Serializers;
 using SPT.Terminal;
 
 using System;
@@ -18,11 +19,12 @@ namespace SPT.Commands
     {
         internal static void Initialize(RootCommand root)
         {
-            Option<string> inputFilenameOption = new(name: "--input", description: "Specifies the input image file for the pixelation process.");
-            Option<string> outputFilenameOption = new(name: "--output", description: "Specifies the output file for the pixelated image.");
-            Option<int> pixelateFactorOption = new(name: "--pixelateFactor", description: "Specifies the pixelate factor for the pixelation transformation. Must be a value greater than 0.");
-            Option<int> paletteSizeOption = new(name: "--paletteSize", description: "Specifies a range of colors that the resulting image will have. When selecting a custom palette, this field will automatically be filled with the number of colors the palette has. Must be a value greater than 0.");
-            Option<int> colorToleranceOption = new(name: "--tolerance", description: "Specifies the tolerance value for the blending and unification of nearby colors during the file pixalization process. Must be an integer numeric value between 0 and 255.");
+            Option<string> inputFilenameOption = new(name: "--input", description: "Specifies the source image file to undergo the pixelation process.");
+            Option<string> outputFilenameOption = new(name: "--output", description: "Sets the destination file for the resulting pixelated image.");
+            Option<int> pixelateFactorOption = new(name: "--pixelateFactor", description: "Determines the intensity of pixelation. Must be a positive integer greater than 0.");
+            Option<int> paletteSizeOption = new(name: "--paletteSize", description: "Defines the color variety in the output image. For custom palettes, this is automatically set to the palette's color count. Must be a positive integer greater than 0.");
+            Option<int> colorToleranceOption = new(name: "--tolerance", description: "Controls the blending and unification of nearby colors during pixelation. Should be an integer between 0 and 255.");
+            Option<string> paletteFilenameOption = new(name: "--palette", description: "Specifies the color palette for pixelation. By default, the path is relative to the 'Palettes' directory. Currently supports gpl (GIMP Palette) format.");
 
             inputFilenameOption.IsRequired = true;
             outputFilenameOption.IsRequired = true;
@@ -36,6 +38,7 @@ namespace SPT.Commands
             pixelateFactorOption.AddAlias("-pf");
             paletteSizeOption.AddAlias("-ps");
             colorToleranceOption.AddAlias("-t");
+            paletteFilenameOption.AddAlias("-p");
 
             inputFilenameOption.AddValidator((OptionResult result) =>
             {
@@ -139,23 +142,58 @@ namespace SPT.Commands
                     return;
                 }
             });
+            paletteFilenameOption.AddValidator((OptionResult result) =>
+            {
+                if (result.Tokens.Count == 0)
+                {
+                    result.ErrorMessage = "No color palette was specified.";
+                    return;
+                }
+                else
+                {
+                    string filename = Path.Combine(Directory.GetCurrentDirectory(), "Palettes", result.Tokens.Single().Value);
+
+                    if (!File.Exists(filename))
+                    {
+                        result.ErrorMessage = "The required color palette file does not exist.";
+                        return;
+                    }
+                    else
+                    {
+                        string extension = Path.GetExtension(filename)?.ToLower();
+
+                        if (string.IsNullOrEmpty(extension))
+                        {
+                            result.ErrorMessage = "The color palette file does not have any extension.";
+                            return;
+                        }
+                        else if (!extension.Equals(".gpl", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            result.ErrorMessage = $"Files with the extension '{extension}' are not compatible with the program. Just GIMP palette (.gpl) file.";
+                            return;
+                        }
+                    }
+                }
+            });
 
             root.AddOption(inputFilenameOption);
             root.AddOption(outputFilenameOption);
             root.AddOption(pixelateFactorOption);
             root.AddOption(paletteSizeOption);
             root.AddOption(colorToleranceOption);
+            root.AddOption(paletteFilenameOption);
 
-            root.SetHandler(Handler, inputFilenameOption, outputFilenameOption, pixelateFactorOption, paletteSizeOption, colorToleranceOption);
+            root.SetHandler(Handler, inputFilenameOption, outputFilenameOption, pixelateFactorOption, paletteSizeOption, colorToleranceOption, paletteFilenameOption);
         }
 
-        internal static void Handler(string inputFilename, string outputFilename, int pixelateFactor, int paletteSize, int colorTolerance)
+        internal static void Handler(string inputFilename, string outputFilename, int pixelateFactor, int paletteSize, int colorTolerance, string paletteFilename)
         {
             using SPTPixelator pixalator = new(File.Open(inputFilename, FileMode.Open, FileAccess.Read), File.Open(outputFilename, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
                 PixelateFactor = pixelateFactor,
                 PaletteSize = paletteSize,
                 ColorTolerance = colorTolerance,
+                CustomPalette = GPLSerializer.Deserialize(Path.Combine(Directory.GetCurrentDirectory(), "Palettes", paletteFilename)),
             };
 
             // Infos

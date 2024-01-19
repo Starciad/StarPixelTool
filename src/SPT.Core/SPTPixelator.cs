@@ -2,7 +2,7 @@
 
 using SPT.Core.Colors;
 using SPT.Core.Extensions;
-using SPT.Core.Palette;
+using SPT.Core.Palettes;
 
 using System;
 using System.Collections.Generic;
