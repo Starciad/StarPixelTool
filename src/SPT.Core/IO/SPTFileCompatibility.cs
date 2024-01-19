@@ -35,12 +35,7 @@ namespace SPT.Core.IO
         {
             string extension = Path.GetExtension(filename)?.ToLower();
 
-            if (!string.IsNullOrEmpty(extension) && (IsImageExtension(extension) || IsVideoExtension(extension)))
-            {
-                return true;
-            }
-
-            return false;
+            return !string.IsNullOrEmpty(extension) && (IsImageExtension(extension) || IsVideoExtension(extension));
         }
 
         /// <summary>
@@ -86,7 +81,7 @@ namespace SPT.Core.IO
             {
                 if (fileType != SPTFileType.Unknown)
                 {
-                    resultBuilder.AppendLine($"{fileType}: {GetExtensionsLabel(fileType)}");
+                    _ = resultBuilder.AppendLine($"{fileType}: {GetExtensionsLabel(fileType)}");
                 }
             }
 

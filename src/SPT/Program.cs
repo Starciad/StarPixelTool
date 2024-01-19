@@ -1,8 +1,8 @@
 ﻿using SPT.Commands;
 
 using System;
-using System.Text;
 using System.CommandLine;
+using System.Text;
 
 namespace SPT
 {
