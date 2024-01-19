@@ -32,9 +32,10 @@ namespace SPT.Commands
             inputFilenameOption.IsRequired = true;
             outputFilenameOption.IsRequired = true;
 
-            pixelateFactorOption.SetDefaultValue(1);
+            pixelateFactorOption.SetDefaultValue(16);
             paletteSizeOption.SetDefaultValue(8);
             colorToleranceOption.SetDefaultValue(1);
+            paletteFilenameOption.SetDefaultValue(string.Empty);
 
             inputFilenameOption.AddAlias("-i");
             outputFilenameOption.AddAlias("-o");
@@ -107,7 +108,6 @@ namespace SPT.Commands
             {
                 if (result.Tokens.Count == 0)
                 {
-                    result.ErrorMessage = "Pixelate factor did not have a specified value.";
                     return;
                 }
 
@@ -121,7 +121,6 @@ namespace SPT.Commands
             {
                 if (result.Tokens.Count == 0)
                 {
-                    result.ErrorMessage = "The value for the color palette size was not specified.";
                     return;
                 }
 
@@ -135,7 +134,6 @@ namespace SPT.Commands
             {
                 if (result.Tokens.Count == 0)
                 {
-                    result.ErrorMessage = "The value for color tolerance was not specified.";
                     return;
                 }
 
@@ -149,7 +147,6 @@ namespace SPT.Commands
             {
                 if (result.Tokens.Count == 0)
                 {
-                    result.ErrorMessage = "No color palette was specified.";
                     return;
                 }
                 else
@@ -189,9 +186,13 @@ namespace SPT.Commands
             root.SetHandler(Handler, inputFilenameOption, outputFilenameOption, pixelateFactorOption, paletteSizeOption, colorToleranceOption, paletteFilenameOption);
         }
 
-        internal static void Handler(string inputFilename, string outputFilename, int pixelateFactor, int paletteSize, int colorTolerance, string paletteFilename)
+        internal static void Handler(string inputFilename, string outputFilename, int pixelateFactor, int paletteSize, int colorTolerance, string customPaletteFilename)
         {
-            SPTPalette customPalette = SPTPaletteSerializer.Deserialize(Path.Combine(SPTDirectory.PalettesDirectory, paletteFilename));
+            SPTPalette customPalette = null;
+            if (!string.IsNullOrWhiteSpace(customPaletteFilename))
+            {
+                SPTPaletteSerializer.Deserialize(Path.Combine(SPTDirectory.PalettesDirectory, customPaletteFilename));
+            }
 
             using SPTPixelator pixalator = new(File.Open(inputFilename, FileMode.Open, FileAccess.Read), File.Open(outputFilename, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
