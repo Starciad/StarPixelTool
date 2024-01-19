@@ -75,7 +75,7 @@ namespace SPT.Core
         /// <summary>
         ///
         /// </summary>
-        public double ColorTolerance
+        public float ColorTolerance
         {
             get => this.colorTolerance;
             set
@@ -86,6 +86,23 @@ namespace SPT.Core
                 }
 
                 this.colorTolerance = value;
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public int UpscaleFactor
+        {
+            get => this.upscaleFactor;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("The upscale factor must be greater than or equal to 1.", nameof(UpscaleFactor));
+                }
+
+                this.upscaleFactor = value;
             }
         }
 
@@ -102,7 +119,8 @@ namespace SPT.Core
         private int pixelateFactor;
         private int paletteSize;
         private SPTPalette customPalette;
-        private double colorTolerance;
+        private float colorTolerance;
+        private int upscaleFactor;
 
         private SKColor[] bitmapOutputColors;
 
@@ -152,6 +170,7 @@ namespace SPT.Core
             ApplyPixelation();
             ApplyColorReduction();
             ApplyCustomPalette();
+            ApplyUpscale();
         }
 
         private void ApplyPixelation()
@@ -231,6 +250,16 @@ namespace SPT.Core
                     this.bitmapOutput.SetPixel(x, y, this.customPalette.GetClosestColor(this.bitmapOutput.GetPixel(x, y)));
                 }
             }
+        }
+        private void ApplyUpscale()
+        {
+            SKImageInfo info = bitmapOutput.Info;
+
+            int resizeWidth = info.Width * this.upscaleFactor;
+            int resizeHeight = info.Height * this.upscaleFactor;
+
+            info.WithSize(resizeWidth, resizeHeight);
+            bitmapOutput.Resize(info, SKFilterQuality.High);
         }
         #endregion
 
