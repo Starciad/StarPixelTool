@@ -14,9 +14,9 @@ namespace SPT.Core.IO.Palettes
         /// Supported palette extensions along with their corresponding <see cref="SPTPalette"/>.
         /// </summary>
         private static readonly (string extension, SPTPaletteFileType paletteType)[] extensions =
-        {
+        [
             (".gpl", SPTPaletteFileType.GPL),
-        };
+        ];
 
         /// <summary>
         /// Checks if a given extension is compatible with any known <see cref="SPTPalette"/> type.

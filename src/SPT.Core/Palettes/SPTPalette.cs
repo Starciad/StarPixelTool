@@ -70,10 +70,5 @@ namespace SPT.Core.Palettes
                 return closestColor;
             }
         }
-
-        public static SPTPalette FromFile(string path)
-        {
-            return !File.Exists(path) ? throw new Exception("") : default;
-        }
     }
 }
