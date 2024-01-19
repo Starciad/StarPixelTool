@@ -4,6 +4,7 @@ using SPT.Core;
 using SPT.Core.Constants;
 using SPT.Core.IO.Palettes;
 using SPT.Core.IO.Pixelization;
+using SPT.Core.Palettes;
 using SPT.Core.Palettes.Serializers;
 using SPT.IO;
 using SPT.Terminal;
@@ -190,12 +191,14 @@ namespace SPT.Commands
 
         internal static void Handler(string inputFilename, string outputFilename, int pixelateFactor, int paletteSize, int colorTolerance, string paletteFilename)
         {
+            SPTPalette customPalette = SPTPaletteSerializer.Deserialize(Path.Combine(SPTDirectory.PalettesDirectory, paletteFilename));
+
             using SPTPixelator pixalator = new(File.Open(inputFilename, FileMode.Open, FileAccess.Read), File.Open(outputFilename, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
                 PixelateFactor = pixelateFactor,
                 PaletteSize = paletteSize,
                 ColorTolerance = colorTolerance,
-                CustomPalette = GPLSerializer.Deserialize(Path.Combine(Directory.GetCurrentDirectory(), "Palettes", paletteFilename)),
+                CustomPalette = customPalette,
             };
 
             // Infos
