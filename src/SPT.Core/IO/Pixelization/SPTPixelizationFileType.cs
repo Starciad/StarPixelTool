@@ -1,9 +1,9 @@
-﻿namespace SPT.Core.IO
+﻿namespace SPT.Core.IO.Pixelization
 {
     /// <summary>
     /// Enumeration representing the type of file for compatibility checking, categorizing files as Unknown, Image, or Video.
     /// </summary>
-    public enum SPTFileType
+    public enum SPTPixelizationFileType
     {
         /// <summary>
         /// The file type is unknown or not categorized.

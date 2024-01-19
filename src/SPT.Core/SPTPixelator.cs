@@ -2,7 +2,7 @@
 
 using SPT.Core.Colors;
 using SPT.Core.Extensions;
-using SPT.Core.Palette;
+using SPT.Core.Palettes;
 
 using System;
 using System.Collections.Generic;
@@ -58,16 +58,16 @@ namespace SPT.Core
         /// <summary>
         ///
         /// </summary>
+        public bool HasCustomPalette => this.customPalette != null;
+
+        /// <summary>
+        ///
+        /// </summary>
         public SPTPalette CustomPalette
         {
             get => this.customPalette;
             set
             {
-                if (value.IsEmpty)
-                {
-                    throw new Exception("The defined custom color palette does not contain any colors.");
-                }
-
                 this.customPalette = value;
             }
         }
@@ -142,7 +142,7 @@ namespace SPT.Core
             this.bitmapOutput = new SKBitmap(this.widthOutput, this.heightOutput);
 
             // Settings
-            if (this.customPalette != null)
+            if (this.HasCustomPalette)
             {
                 this.paletteSize = this.customPalette.Size;
             }
