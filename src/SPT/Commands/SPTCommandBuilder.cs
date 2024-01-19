@@ -21,15 +21,18 @@ namespace SPT.Commands
             Option<string> inputFilenameOption = new(name: "--input", description: "Specifies the input image file for the pixelation process.");
             Option<string> outputFilenameOption = new(name: "--output", description: "Specifies the output file for the pixelated image.");
             Option<int> pixelateFactorOption = new(name: "--pixelateFactor", description: "Specifies the pixelate factor for the pixelation transformation. Must be a value greater than zero.");
+            Option<int> paletteSizeOption = new(name: "--paletteSize", description: "Specifies a range of colors that the resulting image will have. When selecting a custom palette, this field will automatically be filled with the number of colors the palette has. Must be a value greater than zero.");
 
             inputFilenameOption.IsRequired = true;
             outputFilenameOption.IsRequired = true;
 
             pixelateFactorOption.SetDefaultValue(1);
+            paletteSizeOption.SetDefaultValue(8);
 
             inputFilenameOption.AddAlias("-i");
             outputFilenameOption.AddAlias("-o");
             pixelateFactorOption.AddAlias("-pf");
+            paletteSizeOption.AddAlias("-ps");
 
             inputFilenameOption.AddValidator((OptionResult result) =>
             {
@@ -99,10 +102,23 @@ namespace SPT.Commands
                     return;
                 }
 
-                int value = int.Parse(result.Tokens.Single().Value);
-                if (value <= 0)
+                if (int.Parse(result.Tokens.Single().Value) <= 0)
                 {
                     result.ErrorMessage = "Pixelate factor must be greater than 0.";
+                    return;
+                }
+            });
+            paletteSizeOption.AddValidator((OptionResult result) =>
+            {
+                if (result.Tokens.Count == 0)
+                {
+                    result.ErrorMessage = "The value for the color palette size was not specified.";
+                    return;
+                }
+
+                if (int.Parse(result.Tokens.Single().Value) <= 0)
+                {
+                    result.ErrorMessage = "Palette size must be greater than 0.";
                     return;
                 }
             });
@@ -110,11 +126,12 @@ namespace SPT.Commands
             root.AddOption(inputFilenameOption);
             root.AddOption(outputFilenameOption);
             root.AddOption(pixelateFactorOption);
+            root.AddOption(paletteSizeOption);
 
-            root.SetHandler(Handler, inputFilenameOption, outputFilenameOption, pixelateFactorOption);
+            root.SetHandler(Handler, inputFilenameOption, outputFilenameOption, pixelateFactorOption, paletteSizeOption);
         }
 
-        internal static void Handler(string inputFilename, string outputFilename, int pixelateFactor)
+        internal static void Handler(string inputFilename, string outputFilename, int pixelateFactor, int paletteSize)
         {
             using SPTPixelator pixalator = new(File.Open(inputFilename, FileMode.Open, FileAccess.Read), File.Open(outputFilename, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
