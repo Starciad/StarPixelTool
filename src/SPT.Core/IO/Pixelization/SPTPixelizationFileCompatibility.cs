@@ -8,7 +8,7 @@ namespace SPT.Core.IO.Pixelization
     /// </summary>
     public static class SPTPixelizationFileCompatibility
     {
-        private static readonly string[] imageFileExtensions = [ ".png" ];
+        private static readonly string[] imageFileExtensions = [".png"];
         private static readonly string[] videoFileExtensions = [ /* No video formats are currently supported. */ ];
 
         /// <summary>
@@ -19,12 +19,9 @@ namespace SPT.Core.IO.Pixelization
         /// <exception cref="ArgumentException">Thrown when the provided extension is null or an empty space.</exception>
         public static bool Check(string extension)
         {
-            if (string.IsNullOrWhiteSpace(extension))
-            {
-                throw new ArgumentException("The provided extension is null or an empty space.", nameof(extension));
-            }
-
-            return IsImageExtension(extension) || IsVideoExtension(extension);
+            return string.IsNullOrWhiteSpace(extension)
+                ? throw new ArgumentException("The provided extension is null or an empty space.", nameof(extension))
+                : IsImageExtension(extension) || IsVideoExtension(extension);
         }
 
         /// <summary>
@@ -35,12 +32,9 @@ namespace SPT.Core.IO.Pixelization
         /// <exception cref="ArgumentException">Thrown when the provided extension is null or an empty space.</exception>
         public static SPTPixelizationFileType GetFileType(string extension)
         {
-            if (string.IsNullOrWhiteSpace(extension))
-            {
-                throw new ArgumentException("The provided extension is null or an empty space.", nameof(extension));
-            }
-
-            return IsImageExtension(extension) ? SPTPixelizationFileType.Image : IsVideoExtension(extension) ? SPTPixelizationFileType.Video : SPTPixelizationFileType.Unknown;
+            return string.IsNullOrWhiteSpace(extension)
+                ? throw new ArgumentException("The provided extension is null or an empty space.", nameof(extension))
+                : IsImageExtension(extension) ? SPTPixelizationFileType.Image : IsVideoExtension(extension) ? SPTPixelizationFileType.Video : SPTPixelizationFileType.Unknown;
         }
 
         private static bool IsImageExtension(string extension)

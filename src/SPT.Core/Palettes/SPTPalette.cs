@@ -73,14 +73,7 @@ namespace SPT.Core.Palettes
 
         public static SPTPalette FromFile(string path)
         {
-            if (!File.Exists(path))
-            {
-                throw new Exception("");
-            }
-
-
-
-            return default;
+            return !File.Exists(path) ? throw new Exception("") : default;
         }
     }
 }

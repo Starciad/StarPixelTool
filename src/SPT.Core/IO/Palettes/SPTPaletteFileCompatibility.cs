@@ -25,12 +25,9 @@ namespace SPT.Core.IO.Palettes
         /// <returns>True if the extension is compatible; otherwise, false.</returns>
         public static bool Check(string extension)
         {
-            if (string.IsNullOrWhiteSpace(extension))
-            {
-                throw new ArgumentException("The provided extension is null or an empty space.", nameof(extension));
-            }
-
-            return Array.Exists(extensions, x => x.extension.Equals(extension, StringComparison.OrdinalIgnoreCase));
+            return string.IsNullOrWhiteSpace(extension)
+                ? throw new ArgumentException("The provided extension is null or an empty space.", nameof(extension))
+                : Array.Exists(extensions, x => x.extension.Equals(extension, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
@@ -47,14 +44,11 @@ namespace SPT.Core.IO.Palettes
                 throw new ArgumentException("The provided extension is null or an empty space.", nameof(extension));
             }
 
-            var paletteTypeInfo = Array.Find(extensions, x => x.extension.Equals(extension, StringComparison.OrdinalIgnoreCase));
+            (string extension, SPTPaletteFileType paletteType) paletteTypeInfo = Array.Find(extensions, x => x.extension.Equals(extension, StringComparison.OrdinalIgnoreCase));
 
-            if (paletteTypeInfo.Equals(default((string Extension, SPTPaletteFileType Type))))
-            {
-                throw new InvalidOperationException($"No SPTPaletteType associated with the extension '{extension}'.");
-            }
-
-            return paletteTypeInfo.paletteType;
+            return paletteTypeInfo.Equals(default((string Extension, SPTPaletteFileType Type)))
+                ? throw new InvalidOperationException($"No SPTPaletteType associated with the extension '{extension}'.")
+                : paletteTypeInfo.paletteType;
         }
 
         /// <summary>
@@ -65,14 +59,11 @@ namespace SPT.Core.IO.Palettes
         /// <exception cref="InvalidOperationException">Thrown when the paletteType is not associated with any file extension.</exception>
         public static string GetPaletteExtension(SPTPaletteFileType paletteType)
         {
-            var extensionInfo = Array.Find(extensions, x => x.paletteType.Equals(paletteType));
+            (string extension, SPTPaletteFileType paletteType) extensionInfo = Array.Find(extensions, x => x.paletteType.Equals(paletteType));
 
-            if (extensionInfo.Equals(default((string Extension, SPTPaletteFileType Type))))
-            {
-                throw new InvalidOperationException($"No file extension associated with the SPTPaletteType '{paletteType}'.");
-            }
-
-            return extensionInfo.extension;
+            return extensionInfo.Equals(default((string Extension, SPTPaletteFileType Type)))
+                ? throw new InvalidOperationException($"No file extension associated with the SPTPaletteType '{paletteType}'.")
+                : extensionInfo.extension;
         }
 
         /// <summary>
