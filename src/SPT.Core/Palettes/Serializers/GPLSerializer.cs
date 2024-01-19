@@ -42,8 +42,6 @@ namespace SPT.Core.Palettes.Serializers
 
             // Filter out empty lines
             lines = lines.Where(line => !string.IsNullOrWhiteSpace(line)).ToArray();
-
-            bool readingColors = false;
             List<SKColor> paletteColors = [];
 
             foreach (string line in lines)
@@ -52,7 +50,7 @@ namespace SPT.Core.Palettes.Serializers
                 {
                     continue;
                 }
-                else if (readingColors)
+                else
                 {
                     string[] values = line.Split(separator, StringSplitOptions.RemoveEmptyEntries);
                     if (values.Length >= 4)
@@ -63,10 +61,6 @@ namespace SPT.Core.Palettes.Serializers
                             blue: byte.Parse(values[2])
                         ));
                     }
-                }
-                else if (line.Trim() == string.Empty)
-                {
-                    readingColors = true;
                 }
             }
 
