@@ -2,7 +2,7 @@
 
 using SPT.Core;
 using SPT.Core.Constants;
-using SPT.Core.IO;
+using SPT.Core.IO.Pixelization;
 using SPT.Core.Palettes.Serializers;
 using SPT.Terminal;
 
@@ -65,9 +65,9 @@ namespace SPT.Commands
                             result.ErrorMessage = "The input file has no extension, making its type unknown.";
                             return;
                         }
-                        else if (!SPTFileCompatibility.Check(filename))
+                        else if (!SPTFilePixelizationCompatibility.Check(filename))
                         {
-                            result.ErrorMessage = $"Files with the extension '{extension}' are not compatible with the program. The only compatible ones are:{Environment.NewLine}{SPTFileCompatibility.GetCompatibleTypesLabels()}";
+                            result.ErrorMessage = $"Files with the extension '{extension}' are not compatible with the program. The only compatible ones are:{Environment.NewLine}{SPTFilePixelizationCompatibility.GetCompatibleTypesLabels()}";
                             return;
                         }
                     }
@@ -89,9 +89,9 @@ namespace SPT.Commands
                     result.ErrorMessage = "The output file extension has not been set.";
                     return;
                 }
-                else if (!SPTFileCompatibility.Check(filename))
+                else if (!SPTFilePixelizationCompatibility.Check(filename))
                 {
-                    result.ErrorMessage = $"The output file you defined with the extension '{extension}' is not compatible with the program. The only compatible ones are:{Environment.NewLine}{SPTFileCompatibility.GetCompatibleTypesLabels()}.";
+                    result.ErrorMessage = $"The output file you defined with the extension '{extension}' is not compatible with the program. The only compatible ones are:{Environment.NewLine}{SPTFilePixelizationCompatibility.GetCompatibleTypesLabels()}.";
                     return;
                 }
                 else if (!extension.Equals(Path.GetExtension(result.GetValueForOption(inputFilenameOption))?.ToLower()))
