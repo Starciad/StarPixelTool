@@ -61,14 +61,14 @@ namespace SPT.Commands
                     }
                     else
                     {
-                        string extension = Path.GetExtension(filename)?.ToLower();
+                        string extension = Path.GetExtension(filename).ToLower();
 
                         if (string.IsNullOrEmpty(extension))
                         {
                             result.ErrorMessage = "The input file has no extension, making its type unknown.";
                             return;
                         }
-                        else if (!SPTPixelizationFileCompatibility.Check(filename))
+                        else if (!SPTPixelizationFileCompatibility.Check(extension))
                         {
                             result.ErrorMessage = $"Files with the extension '{extension}' are not compatible with the program. The only compatible ones are:{Environment.NewLine}{SPTPixelizationFileCompatibility.GetCompatibleTypesLabels()}";
                             return;
@@ -92,7 +92,7 @@ namespace SPT.Commands
                     result.ErrorMessage = "The output file extension has not been set.";
                     return;
                 }
-                else if (!SPTPixelizationFileCompatibility.Check(filename))
+                else if (!SPTPixelizationFileCompatibility.Check(extension))
                 {
                     result.ErrorMessage = $"The output file you defined with the extension '{extension}' is not compatible with the program. The only compatible ones are:{Environment.NewLine}{SPTPixelizationFileCompatibility.GetCompatibleTypesLabels()}.";
                     return;
