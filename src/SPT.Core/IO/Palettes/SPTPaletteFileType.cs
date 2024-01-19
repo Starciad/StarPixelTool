@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents the types of SPTPalette formats.
     /// </summary>
-    public enum SPTPaletteType
+    public enum SPTPaletteFileType
     {
         /// <summary>
         /// The file type is unknown or not categorized.

@@ -32,15 +32,15 @@ namespace SPT.Core.Palettes.Serializers
 
             string extension = Path.GetExtension(filename);
 
-            if (!SPTPaletteCompatibility.Check(extension))
+            if (!SPTPaletteFileCompatibility.Check(extension))
             {
                 throw new NotSupportedException("The specified color palette file is not supported by the system.");
             }
 
-            return SPTPaletteCompatibility.GetPaletteType(extension) switch
+            return SPTPaletteFileCompatibility.GetPaletteType(extension) switch
             {
-                SPTPaletteType.Unknown => null,
-                SPTPaletteType.GPL => GPLSerializer.Deserialize(filename),
+                SPTPaletteFileType.Unknown => null,
+                SPTPaletteFileType.GPL => GPLSerializer.Deserialize(filename),
                 _ => null,
             };
         }

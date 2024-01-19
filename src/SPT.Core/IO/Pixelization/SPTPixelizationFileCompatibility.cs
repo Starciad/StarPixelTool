@@ -6,7 +6,7 @@ namespace SPT.Core.IO.Pixelization
     /// <summary>
     /// Utility class for checking file compatibility, determining file types, and handling common image and video file extensions.
     /// </summary>
-    public static class SPTFilePixelizationCompatibility
+    public static class SPTPixelizationFileCompatibility
     {
         private static readonly string[] imageFileExtensions = [ ".png" ];
         private static readonly string[] videoFileExtensions = [ /* No video formats are currently supported. */ ];
@@ -28,19 +28,19 @@ namespace SPT.Core.IO.Pixelization
         }
 
         /// <summary>
-        /// Gets the <see cref="SPTFilePixelizationType"/> associated with a given file extension.
+        /// Gets the <see cref="SPTPixelizationFileType"/> associated with a given file extension.
         /// </summary>
-        /// <param name="extension">The file extension to retrieve the <see cref="SPTFilePixelizationType"/> for.</param>
-        /// <returns>The <see cref="SPTFilePixelizationType"/> associated with the extension.</returns>
+        /// <param name="extension">The file extension to retrieve the <see cref="SPTPixelizationFileType"/> for.</param>
+        /// <returns>The <see cref="SPTPixelizationFileType"/> associated with the extension.</returns>
         /// <exception cref="ArgumentException">Thrown when the provided extension is null or an empty space.</exception>
-        public static SPTFilePixelizationType GetFileType(string extension)
+        public static SPTPixelizationFileType GetFileType(string extension)
         {
             if (string.IsNullOrWhiteSpace(extension))
             {
                 throw new ArgumentException("The provided extension is null or an empty space.", nameof(extension));
             }
 
-            return IsImageExtension(extension) ? SPTFilePixelizationType.Image : IsVideoExtension(extension) ? SPTFilePixelizationType.Video : SPTFilePixelizationType.Unknown;
+            return IsImageExtension(extension) ? SPTPixelizationFileType.Image : IsVideoExtension(extension) ? SPTPixelizationFileType.Video : SPTPixelizationFileType.Unknown;
         }
 
         private static bool IsImageExtension(string extension)
@@ -61,9 +61,9 @@ namespace SPT.Core.IO.Pixelization
         {
             StringBuilder resultBuilder = new();
 
-            foreach (SPTFilePixelizationType fileType in Enum.GetValues(typeof(SPTFilePixelizationType)))
+            foreach (SPTPixelizationFileType fileType in Enum.GetValues(typeof(SPTPixelizationFileType)))
             {
-                if (fileType != SPTFilePixelizationType.Unknown)
+                if (fileType != SPTPixelizationFileType.Unknown)
                 {
                     _ = resultBuilder.AppendLine($"{fileType}: {GetExtensionsLabel(fileType)}");
                 }
@@ -72,12 +72,12 @@ namespace SPT.Core.IO.Pixelization
             return resultBuilder.ToString().TrimEnd();
         }
 
-        private static string GetExtensionsLabel(SPTFilePixelizationType fileType)
+        private static string GetExtensionsLabel(SPTPixelizationFileType fileType)
         {
             return fileType switch
             {
-                SPTFilePixelizationType.Image => string.Join(", ", imageFileExtensions),
-                SPTFilePixelizationType.Video => string.Join(", ", videoFileExtensions),
+                SPTPixelizationFileType.Image => string.Join(", ", imageFileExtensions),
+                SPTPixelizationFileType.Video => string.Join(", ", videoFileExtensions),
                 _ => string.Empty,
             };
         }
