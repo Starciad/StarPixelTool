@@ -56,7 +56,7 @@
 			<PackagePath>\</PackagePath>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<Content Include="Palettes">
+		<Content Include="Palettes\**">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
