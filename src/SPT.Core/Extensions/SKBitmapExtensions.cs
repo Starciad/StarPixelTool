@@ -1,31 +1,26 @@
 ﻿using SkiaSharp;
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace SPT.Core.Extensions
 {
     internal static class SKBitmapExtensions
     {
-        internal static SKColor GetAverageColorInArea(this SKBitmap bitmap, int x, int y, int areaSize)
+        internal static SKColor GetAverageColorInArea(this SKBitmap bitmap, int x, int y)
         {
-            int count = 0;
+            SKColor[] colors = bitmap.GetNeighboringColors(x, y).Select(x => x.color).ToArray();
+
             int totalR = 0, totalG = 0, totalB = 0;
+            int count = colors.Length;
 
-            for (int i = -1; i < areaSize; i++)
+            for (int i = 0; i < count; i++)
             {
-                for (int j = -1; j < areaSize; j++)
-                {
-                    int xPivot = x + i;
-                    int yPivot = y + j;
+                SKColor color = colors[i];
 
-                    if (bitmap.IsWithinBitmapBounds(xPivot, yPivot))
-                    {
-                        SKColor pixelColor = bitmap.GetPixel(xPivot, yPivot);
-                        totalR += pixelColor.Red;
-                        totalG += pixelColor.Green;
-                        totalB += pixelColor.Blue;
-
-                        count++;
-                    }
-                }
+                totalR += color.Red;
+                totalG += color.Green;
+                totalB += color.Blue;
             }
 
             if (count > 0)
@@ -38,6 +33,26 @@ namespace SPT.Core.Extensions
             }
 
             return SKColors.Empty;
+        }
+        internal static (SKColor color, int x, int y)[] GetNeighboringColors(this SKBitmap bitmap, int x, int y)
+        {
+            List<(SKColor, int, int)> colors = [];
+
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    int xPivot = x + i;
+                    int yPivot = y + j;
+
+                    if (bitmap.IsWithinBitmapBounds(xPivot, yPivot))
+                    {
+                        colors.Add((bitmap.GetPixel(xPivot, yPivot), xPivot, yPivot));
+                    }
+                }
+            }
+
+            return [.. colors];
         }
 
         private static bool IsWithinBitmapBounds(this SKBitmap bitmap, int x, int y)

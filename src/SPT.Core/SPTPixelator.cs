@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 
 using SPT.Core.Colors;
+using SPT.Core.Effects;
 using SPT.Core.Extensions;
 using SPT.Core.Palettes;
 
@@ -121,6 +122,7 @@ namespace SPT.Core
         private SPTPalette customPalette;
         private float colorTolerance;
         private int upscaleFactor;
+        private (SPTEffect effect, object[] parameters)[] effectDefinitions;
 
         private SKColor[] bitmapOutputColors;
 
@@ -170,6 +172,7 @@ namespace SPT.Core
             ApplyPixelation();
             ApplyColorReduction();
             ApplyCustomPalette();
+            ApplyEffects();
             ApplyUpscale();
         }
 
@@ -184,7 +187,7 @@ namespace SPT.Core
             {
                 for (int x = 0; x < this.widthOutput; x++)
                 {
-                    SKColor color = this.bitmapInput.GetAverageColorInArea(inputPosX, inputPosY, 3);
+                    SKColor color = this.bitmapInput.GetAverageColorInArea(inputPosX, inputPosY);
 
                     this.bitmapOutput.SetPixel(x, y, color);
                     colors.Add(color);
@@ -213,7 +216,7 @@ namespace SPT.Core
 
                 foreach (SKColor paletteColor in reducedColors)
                 {
-                    if (SPTColorUtility.Difference(currentColor, paletteColor) < this.colorTolerance)
+                    if (SPTColorMath.Difference(currentColor, paletteColor) < this.colorTolerance)
                     {
                         isSimilarColor = true;
                         break;
@@ -249,6 +252,14 @@ namespace SPT.Core
                 {
                     this.bitmapOutput.SetPixel(x, y, this.customPalette.GetClosestColor(this.bitmapOutput.GetPixel(x, y)));
                 }
+            }
+        }
+        private void ApplyEffects()
+        {
+            for (int i = 0; i < effectDefinitions.Length; i++)
+            {
+                (SPTEffect, object[]) effectDefinition = effectDefinitions[i];
+                effectDefinition.Item1.Apply(this.bitmapOutput, effectDefinition.Item2);
             }
         }
         private void ApplyUpscale()
