@@ -1,7 +1,5 @@
 ﻿using MessagePack;
 
-using System.IO;
-
 namespace SPT.Models
 {
     [MessagePackObject]
@@ -9,5 +7,10 @@ namespace SPT.Models
     {
         [Key(0)]
         public string DefinedPalette { get; set; }
+
+        public SPTPalettesSettings()
+        {
+            this.DefinedPalette = string.Empty;
+        }
     }
 }

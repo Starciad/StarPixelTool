@@ -4,6 +4,7 @@ using SPT.Constants;
 using SPT.Core.IO.Palettes;
 using SPT.Core.IO.Pixelization;
 using SPT.IO;
+using SPT.Managers;
 using SPT.Models;
 using SPT.Terminal;
 
@@ -54,22 +55,16 @@ namespace SPT.Commands
                     throw new ArgumentException("Input or output filename cannot be null or a blank space.",
                         nameof(inputFilename) + ", " + nameof(outputFilename));
                 }
-
                 if (!File.Exists(inputFilename))
                 {
                     throw new FileNotFoundException("The input file cannot be found.", inputFilename);
                 }
 
-                SPTFileSettings fileSettings = new()
+                SPTSettingsManager.CreateFileSettings(new SPTFileSettings()
                 {
                     InputFilename = inputFilename,
                     OutputFilename = outputFilename
-                };
-
-                string directoryPath = SPTDirectory.SystemDirectory;
-                string filePath = Path.Combine(directoryPath, SPTFileConstants.FileSettings);
-                Directory.CreateDirectory(directoryPath);
-                File.WriteAllBytes(filePath, MessagePackSerializer.Serialize(fileSettings));
+                });
             }
 
             // Validators

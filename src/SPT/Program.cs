@@ -1,4 +1,5 @@
 ﻿using SPT.Commands;
+using SPT.Managers;
 
 using System;
 using System.CommandLine;
@@ -12,6 +13,13 @@ namespace SPT
         private static int Main(string[] args)
         {
             Console.OutputEncoding = Encoding.Unicode;
+
+            return Initialize(args);
+        }
+
+        private static int Initialize(string[] args)
+        {
+            SPTSettingsManager.Initialize();
 
             RootCommand rootCommand = new("SPT is a utility that allows you to pixelate images, allowing you to apply dozens of different filters and settings.");
             SPTCommandBuilder.Initialize(rootCommand);

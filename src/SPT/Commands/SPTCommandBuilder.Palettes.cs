@@ -3,6 +3,7 @@
 using SPT.Constants;
 using SPT.Core.IO.Palettes;
 using SPT.IO;
+using SPT.Managers;
 using SPT.Models;
 using SPT.Terminal;
 
@@ -46,19 +47,12 @@ namespace SPT.Commands
             // Handlers
             void Handler(string definedPalette, bool showAllPalettes)
             {
+                SPTPalettesSettings palettesSettings = new();
+
                 if (!string.IsNullOrWhiteSpace(definedPalette))
                 {
-                    SPTPalettesSettings palettesSettings = new()
-                    {
-                        DefinedPalette = definedPalette
-                    };
-
-                    string directoryPath = SPTDirectory.SystemDirectory;
-                    string filePath = Path.Combine(directoryPath, SPTFileConstants.PaletteSettings);
-                    Directory.CreateDirectory(directoryPath);
-                    File.WriteAllBytes(filePath, MessagePackSerializer.Serialize(palettesSettings));
+                    palettesSettings.DefinedPalette = definedPalette;
                 }
-
                 if (showAllPalettes)
                 {
                     List<string> palettesFiles = [];
@@ -92,6 +86,11 @@ namespace SPT.Commands
 
                     Console.WriteLine();
                 }
+
+                SPTSettingsManager.CreatePalettesSettings(new SPTPalettesSettings()
+                {
+                    DefinedPalette = definedPalette
+                });
             }
 
             // Validators

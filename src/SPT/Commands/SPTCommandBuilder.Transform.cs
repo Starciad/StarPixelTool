@@ -10,6 +10,7 @@ using SPT.Core.IO.Pixelization;
 using SPT.Core.Palettes;
 using SPT.Core.Palettes.Serializers;
 using SPT.IO;
+using SPT.Managers;
 using SPT.Models;
 using SPT.Terminal;
 
@@ -62,11 +63,8 @@ namespace SPT.Commands
             void Handler(int pixelateFactor, int paletteSize, int colorTolerance)
             {
                 // Settings
-                using FileStream fileSettingsStream = File.Open(Path.Combine(SPTDirectory.SystemDirectory, SPTFileConstants.FileSettings), FileMode.Open);
-                using FileStream paletteSettingsStream = File.Open(Path.Combine(SPTDirectory.SystemDirectory, SPTFileConstants.PaletteSettings), FileMode.Open);
-
-                SPTFileSettings fileSettings = MessagePackSerializer.Deserialize<SPTFileSettings>(fileSettingsStream);
-                SPTPalettesSettings palettesSettings = MessagePackSerializer.Deserialize<SPTPalettesSettings>(paletteSettingsStream);
+                SPTFileSettings fileSettings = SPTSettingsManager.GetFileSettings();
+                SPTPalettesSettings palettesSettings = SPTSettingsManager.GetPalettesSettings();
 
                 using FileStream inputFs = File.Open(fileSettings.InputFilename, FileMode.Open, FileAccess.Read);
                 using FileStream outputFs = File.Open(fileSettings.OutputFilename, FileMode.OpenOrCreate, FileAccess.ReadWrite);

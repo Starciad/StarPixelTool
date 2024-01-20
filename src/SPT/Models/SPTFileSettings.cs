@@ -10,5 +10,11 @@ namespace SPT.Models
 
         [Key(1)]
         internal string OutputFilename { get; set; }
+
+        public SPTFileSettings()
+        {
+            this.InputFilename = string.Empty;
+            this.OutputFilename = string.Empty;
+        }
     }
 }
