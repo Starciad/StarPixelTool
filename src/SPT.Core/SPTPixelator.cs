@@ -172,8 +172,8 @@ namespace SPT.Core
             ApplyPixelation();
             ApplyColorReduction();
             ApplyCustomPalette();
-            ApplyEffects();
-            ApplyUpscale();
+            //ApplyEffects();
+            //ApplyUpscale();
         }
 
         private void ApplyPixelation()

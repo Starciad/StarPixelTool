@@ -19,10 +19,12 @@ namespace SPT.Commands
         {
             // ================================ //
             // Options
-            Option<string> definePaletteFileOption = new(name: "--define", description: "Specify the path to a file containing the palette settings that will be used in the pixalization process.");
+            Option<string> definePaletteFileOption = new(name: "--define", description: "Specify the path (relative or complete) to a file containing the palette settings that will be used in the pixalization process.");
+            Option<bool> removeDefinedPaletteOption = new(name: "--remove", description: "Removes the currently defined palette.");
             Option<bool> showAllPalettesOption = new(name: "--showAll", description: "Show all available palettes.");
 
             definePaletteFileOption.AddAlias("-d");
+            removeDefinedPaletteOption.AddAlias("-r");
             showAllPalettesOption.AddAlias("-sa");
 
             definePaletteFileOption.AddValidator(DefinePaletteFileValidator);
@@ -33,19 +35,24 @@ namespace SPT.Commands
             {
                 definePaletteFileOption,
                 showAllPalettesOption,
+                removeDefinedPaletteOption,
             };
 
-            command.SetHandler(Handler, definePaletteFileOption, showAllPalettesOption);
+            command.SetHandler(Handler, definePaletteFileOption, showAllPalettesOption, removeDefinedPaletteOption);
             root.AddCommand(command);
 
             // ================================ //
             // Methods
             // Handlers
-            void Handler(string definedPalette, bool showAllPalettes)
+            void Handler(string definedPalette, bool showAllPalettes, bool removePalette)
             {
                 SPTPalettesSettings palettesSettings = new();
 
-                if (!string.IsNullOrWhiteSpace(definedPalette))
+                if (removePalette)
+                {
+                    palettesSettings.DefinedPalette = string.Empty;
+                }
+                else if (!string.IsNullOrWhiteSpace(definedPalette))
                 {
                     palettesSettings.DefinedPalette = definedPalette;
                 }
