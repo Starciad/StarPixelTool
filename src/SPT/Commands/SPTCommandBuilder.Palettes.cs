@@ -1,7 +1,4 @@
-﻿using MessagePack;
-
-using SPT.Constants;
-using SPT.Core.IO.Palettes;
+﻿using SPT.Core.IO.Palettes;
 using SPT.IO;
 using SPT.Managers;
 using SPT.Models;
@@ -24,7 +21,6 @@ namespace SPT.Commands
             // Options
             Option<string> definePaletteFileOption = new(name: "--define", description: "Specify the path to a file containing the palette settings that will be used in the pixalization process.");
             Option<bool> showAllPalettesOption = new(name: "--showAll", description: "Show all available palettes.");
-
 
             definePaletteFileOption.AddAlias("-d");
             showAllPalettesOption.AddAlias("-sa");
@@ -53,6 +49,7 @@ namespace SPT.Commands
                 {
                     palettesSettings.DefinedPalette = definedPalette;
                 }
+
                 if (showAllPalettes)
                 {
                     List<string> palettesFiles = [];
@@ -62,15 +59,15 @@ namespace SPT.Commands
                         palettesFiles.AddRange(Directory.EnumerateFiles(SPTDirectory.PalettesDirectory, string.Concat('*', extension), SearchOption.AllDirectories));
                     }
 
-                    Console.WriteLine();
+                    SPTTerminal.BreakLine();
                     SPTTerminal.ApplyColor(ConsoleColor.Green, "[ Showing all color palettes installed on the device. ]");
                     Console.WriteLine(Environment.NewLine);
                     if (palettesFiles.Count == 0)
                     {
                         SPTTerminal.ApplyColor(ConsoleColor.Red, "Unable to find any color palette file.");
-                        Console.WriteLine();
+                        SPTTerminal.BreakLine();
                         SPTTerminal.ApplyColor(ConsoleColor.Cyan, string.Concat("Directory searched: ", SPTDirectory.PalettesDirectory));
-                        Console.WriteLine();
+                        SPTTerminal.BreakLine();
                     }
                     else if (palettesFiles.Count == 1)
                     {
@@ -84,7 +81,7 @@ namespace SPT.Commands
                         }
                     }
 
-                    Console.WriteLine();
+                    SPTTerminal.BreakLine();
                 }
 
                 SPTSettingsManager.CreatePalettesSettings(new SPTPalettesSettings()
@@ -133,7 +130,7 @@ namespace SPT.Commands
                 SPTTerminal.ApplyColor(ConsoleColor.Magenta, "[•] ");
                 Console.Write(string.Concat(Path.GetFileName(paletteFilename), " "));
                 SPTTerminal.ApplyColor(ConsoleColor.DarkYellow, string.Concat('(', paletteFilename, ')'));
-                Console.WriteLine();
+                SPTTerminal.BreakLine();
             }
         }
     }

@@ -37,21 +37,21 @@ namespace SPT.Commands
             {
                 if (showSupportedFileFormats)
                 {
-                    Console.WriteLine();
+                    SPTTerminal.BreakLine();
                     SPTTerminal.ApplyColor(ConsoleColor.Blue, "[ Showing all supported file formats. ]");
-                    Console.WriteLine();
+                    SPTTerminal.BreakLine();
                     Console.WriteLine(SPTPixelizationFileCompatibility.GetCompatibleTypesLabels());
                 }
 
                 if (showSupportedPaletteFormats)
                 {
-                    Console.WriteLine();
+                    SPTTerminal.BreakLine();
                     SPTTerminal.ApplyColor(ConsoleColor.Blue, "[ Showing all supported color palette formats. ]");
-                    Console.WriteLine();
+                    SPTTerminal.BreakLine();
                     Console.WriteLine(SPTPaletteFileCompatibility.GetCompatibleTypesLabels());
                 }
 
-                Console.WriteLine();
+                SPTTerminal.BreakLine();
             }
         }
     }

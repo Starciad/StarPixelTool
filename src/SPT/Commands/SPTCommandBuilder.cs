@@ -1,7 +1,4 @@
-﻿using SPT.Terminal;
-
-using System;
-using System.CommandLine;
+﻿using System.CommandLine;
 
 namespace SPT.Commands
 {

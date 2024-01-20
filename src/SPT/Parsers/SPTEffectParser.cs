@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
+﻿using SPT.Core.Effects;
 
-namespace SPT.Core.Effects
+using System.Collections.Generic;
+using System.Linq;
+
+namespace SPT.Parsers
 {
     internal static class SPTEffectParser
     {

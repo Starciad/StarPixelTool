@@ -1,12 +1,7 @@
 ﻿using Figgle;
 
-using MessagePack;
-
-using SPT.Constants;
 using SPT.Core;
 using SPT.Core.Constants;
-using SPT.Core.IO.Palettes;
-using SPT.Core.IO.Pixelization;
 using SPT.Core.Palettes;
 using SPT.Core.Palettes.Serializers;
 using SPT.IO;
@@ -155,6 +150,7 @@ namespace SPT.Commands
                     return;
                 }
             }
+
             void ColorToleranceValidator(OptionResult result)
             {
                 if (result.Tokens.Count == 0)
@@ -168,6 +164,7 @@ namespace SPT.Commands
                     return;
                 }
             }
+
             void PaletteSizeValidator(OptionResult result)
             {
                 if (result.Tokens.Count == 0)
@@ -188,6 +185,7 @@ namespace SPT.Commands
                 SPTTerminal.ApplyColor(color, "[•] ");
                 Console.WriteLine(step);
             }
+
             void DisplayFinishDetail(ConsoleColor color, string label, string value)
             {
                 SPTTerminal.ApplyColor(color, "[•] ");

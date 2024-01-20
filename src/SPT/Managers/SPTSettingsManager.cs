@@ -42,7 +42,7 @@ namespace SPT.Managers
 
             if (!File.Exists(filePath))
             {
-                Directory.CreateDirectory(directoryPath);
+                _ = Directory.CreateDirectory(directoryPath);
                 CreateSettingsFile(createDefaultSettings(), fileName);
             }
         }
