@@ -13,7 +13,7 @@ namespace SPT
         {
             Console.OutputEncoding = Encoding.Unicode;
 
-            RootCommand rootCommand = new("Transform images into Pixel Art with various filters and effects.");
+            RootCommand rootCommand = new("SPT is a utility that allows you to pixelate images, allowing you to apply dozens of different filters and settings.");
             SPTCommandBuilder.Initialize(rootCommand);
 
             return rootCommand.Invoke(args);
