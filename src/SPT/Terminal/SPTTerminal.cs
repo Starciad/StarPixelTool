@@ -14,7 +14,7 @@ namespace SPT.Terminal
 
         internal static void BreakLine()
         {
-            SPTTerminal.BreakLine();
+            Console.WriteLine();
         }
 
         internal static void SetForegroundColor(ConsoleColor color)
