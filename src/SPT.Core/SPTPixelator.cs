@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 
 using SPT.Core.Colors;
+using SPT.Core.Effects;
 using SPT.Core.Extensions;
 using SPT.Core.Palettes;
 
@@ -75,7 +76,7 @@ namespace SPT.Core
         /// <summary>
         ///
         /// </summary>
-        public double ColorTolerance
+        public float ColorTolerance
         {
             get => this.colorTolerance;
             set
@@ -86,6 +87,23 @@ namespace SPT.Core
                 }
 
                 this.colorTolerance = value;
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public int UpscaleFactor
+        {
+            get => this.upscaleFactor;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("The upscale factor must be greater than or equal to 1.", nameof(UpscaleFactor));
+                }
+
+                this.upscaleFactor = value;
             }
         }
 
@@ -102,7 +120,9 @@ namespace SPT.Core
         private int pixelateFactor;
         private int paletteSize;
         private SPTPalette customPalette;
-        private double colorTolerance;
+        private float colorTolerance;
+        private int upscaleFactor;
+        private (SPTEffect effect, object[] parameters)[] effectDefinitions;
 
         private SKColor[] bitmapOutputColors;
 
@@ -152,6 +172,8 @@ namespace SPT.Core
             ApplyPixelation();
             ApplyColorReduction();
             ApplyCustomPalette();
+            ApplyEffects();
+            ApplyUpscale();
         }
 
         private void ApplyPixelation()
@@ -165,7 +187,7 @@ namespace SPT.Core
             {
                 for (int x = 0; x < this.widthOutput; x++)
                 {
-                    SKColor color = this.bitmapInput.GetAverageColorInArea(inputPosX, inputPosY, 3);
+                    SKColor color = this.bitmapInput.GetAverageColorInArea(inputPosX, inputPosY);
 
                     this.bitmapOutput.SetPixel(x, y, color);
                     colors.Add(color);
@@ -194,7 +216,7 @@ namespace SPT.Core
 
                 foreach (SKColor paletteColor in reducedColors)
                 {
-                    if (SPTColorUtility.Difference(currentColor, paletteColor) < this.colorTolerance)
+                    if (SPTColorMath.Difference(currentColor, paletteColor) < this.colorTolerance)
                     {
                         isSimilarColor = true;
                         break;
@@ -231,6 +253,24 @@ namespace SPT.Core
                     this.bitmapOutput.SetPixel(x, y, this.customPalette.GetClosestColor(this.bitmapOutput.GetPixel(x, y)));
                 }
             }
+        }
+        private void ApplyEffects()
+        {
+            for (int i = 0; i < effectDefinitions.Length; i++)
+            {
+                (SPTEffect, object[]) effectDefinition = effectDefinitions[i];
+                effectDefinition.Item1.Apply(this.bitmapOutput, effectDefinition.Item2);
+            }
+        }
+        private void ApplyUpscale()
+        {
+            SKImageInfo info = bitmapOutput.Info;
+
+            int resizeWidth = info.Width * this.upscaleFactor;
+            int resizeHeight = info.Height * this.upscaleFactor;
+
+            info.WithSize(resizeWidth, resizeHeight);
+            bitmapOutput.Resize(info, SKFilterQuality.High);
         }
         #endregion
 

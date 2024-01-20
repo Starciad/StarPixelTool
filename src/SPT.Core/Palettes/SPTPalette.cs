@@ -53,12 +53,12 @@ namespace SPT.Core.Palettes
             else
             {
                 SKColor closestColor = this.Colors[0];
-                double minDifference = SPTColorUtility.Difference(color, closestColor);
+                double minDifference = SPTColorMath.Difference(color, closestColor);
 
                 for (int i = 1; i < this.Size; i++)
                 {
                     SKColor currentColor = this.Colors[i];
-                    double currentDifference = SPTColorUtility.Difference(color, currentColor);
+                    double currentDifference = SPTColorMath.Difference(color, currentColor);
 
                     if (currentDifference < minDifference)
                     {
