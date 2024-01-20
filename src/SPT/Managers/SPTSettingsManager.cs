@@ -13,7 +13,7 @@ namespace SPT.Managers
     {
         internal static void Initialize()
         {
-            EnsureSettingsFileExists(SPTFileConstants.FileSettings, () => new SPTFileSettings());
+            EnsureSettingsFileExists(SPTFileConstants.FileSettings, () => new SPTFileSettings() { InputFilename = "a", OutputFilename = "b"});
             EnsureSettingsFileExists(SPTFileConstants.PaletteSettings, () => new SPTPalettesSettings());
         }
 

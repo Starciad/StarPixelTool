@@ -3,7 +3,7 @@
 namespace SPT.Models
 {
     [MessagePackObject]
-    internal struct SPTPalettesSettings
+    public struct SPTPalettesSettings
     {
         [Key(0)]
         public string DefinedPalette { get; set; }
