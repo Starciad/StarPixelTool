@@ -9,19 +9,19 @@ namespace SPT.Core.Effects.Common
 {
     public sealed class SPTOutlineEffect : SPTEffect
     {
+        private readonly SKColor color = SKColors.Black;
+        private readonly float power = 256f;
+
         protected override void OnBuild()
         {
-            this.Name = "";
+            this.Name = "outline";
             this.Description = "";
         }
 
-        protected override void OnApply(SKBitmap bitmap, object[] parameters)
+        protected override void OnApply(SKBitmap bitmap)
         {
             int width = bitmap.Width;
             int height = bitmap.Height;
-
-            float power = (float)parameters[0];
-            SKColor color = (SKColor)parameters[1];
 
             for (int x = 0; x < width; x++)
             {

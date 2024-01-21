@@ -70,8 +70,8 @@ namespace SPT.Core.IO.Pixelization
         {
             return fileType switch
             {
-                SPTPixelizationFileType.Image => string.Join(", ", imageFileExtensions),
-                SPTPixelizationFileType.Video => string.Join(", ", videoFileExtensions),
+                SPTPixelizationFileType.Image => imageFileExtensions.Length == 0 ? "No image formats are supported." : string.Join(", ", imageFileExtensions),
+                SPTPixelizationFileType.Video => videoFileExtensions.Length == 0 ? "No video formats are supported." : string.Join(", ", videoFileExtensions),
                 _ => string.Empty,
             };
         }
