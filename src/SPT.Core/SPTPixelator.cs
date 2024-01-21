@@ -93,7 +93,7 @@ namespace SPT.Core
         /// <summary>
         ///
         /// </summary>
-        public int UpscaleFactor
+        public float UpscaleFactor
         {
             get => this.upscaleFactor;
             set
@@ -107,6 +107,18 @@ namespace SPT.Core
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        public SPTEffect[] Effects
+        {
+            get => this.effects;
+            set
+            {
+                this.effects = value;
+            }
+        }
+
         private SKBitmap bitmapInput;
         private SKBitmap bitmapOutput;
 
@@ -117,14 +129,14 @@ namespace SPT.Core
 
         private bool disposedValue;
 
-        private int pixelateFactor;
-        private int paletteSize;
+        private int pixelateFactor = 16;
+        private int paletteSize = 8;
         private SPTPalette customPalette;
-        private float colorTolerance;
-        private int upscaleFactor;
-        private (SPTEffect effect, object[] parameters)[] effectDefinitions;
+        private float colorTolerance = 16;
+        private float upscaleFactor = 1;
+        private SPTEffect[] effects = [];
 
-        private SKColor[] bitmapOutputColors;
+        private SKColor[] bitmapOutputColors = [];
 
         #region System
         /// <summary>
@@ -172,8 +184,8 @@ namespace SPT.Core
             ApplyPixelation();
             ApplyColorReduction();
             ApplyCustomPalette();
-            //ApplyEffects();
-            //ApplyUpscale();
+            ApplyEffects();
+            ApplyUpscale();
         }
 
         private void ApplyPixelation()
@@ -256,18 +268,18 @@ namespace SPT.Core
         }
         private void ApplyEffects()
         {
-            for (int i = 0; i < effectDefinitions.Length; i++)
+            for (int i = 0; i < effects.Length; i++)
             {
-                (SPTEffect, object[]) effectDefinition = effectDefinitions[i];
-                effectDefinition.Item1.Apply(this.bitmapOutput, effectDefinition.Item2);
+                SPTEffect effect = effects[i];
+                effect.ApplyEffect(this.bitmapOutput);
             }
         }
         private void ApplyUpscale()
         {
             SKImageInfo info = bitmapOutput.Info;
 
-            int resizeWidth = info.Width * this.upscaleFactor;
-            int resizeHeight = info.Height * this.upscaleFactor;
+            int resizeWidth = (int)Math.Round(info.Width * this.upscaleFactor);
+            int resizeHeight = (int)Math.Round(info.Height * this.upscaleFactor);
 
             info.WithSize(resizeWidth, resizeHeight);
             bitmapOutput.Resize(info, SKFilterQuality.High);

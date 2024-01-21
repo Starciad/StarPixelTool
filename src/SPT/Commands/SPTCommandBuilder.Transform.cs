@@ -2,6 +2,7 @@
 
 using SPT.Core;
 using SPT.Core.Constants;
+using SPT.Core.Effects;
 using SPT.Core.Palettes;
 using SPT.Core.Palettes.Serializers;
 using SPT.IO;
@@ -10,6 +11,7 @@ using SPT.Models;
 using SPT.Terminal;
 
 using System;
+using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Parsing;
 using System.Diagnostics;
@@ -23,10 +25,15 @@ namespace SPT.Commands
         private static void InitializeTransformCommand(RootCommand root)
         {
             // ================================ //
+            // Vars
+            List<SPTEffect> effects = [];
+
+            // ================================ //
             // Options
             Option<int> pixelateFactorOption = new(name: "--pixelateFactor", description: "Determines the intensity of pixelation. Must be a positive integer greater than 0.");
             Option<int> paletteSizeOption = new(name: "--paletteSize", description: "Defines the color variety in the output image. For custom palettes, this is automatically set to the palette's color count. Must be a positive integer greater than 0.");
             Option<int> colorToleranceOption = new(name: "--tolerance", description: "Controls the blending and unification of nearby colors during pixelation. Should be an integer between 0 and 255.");
+            Option<string> effectsOption = new(name: "--effects", description: "");
 
             pixelateFactorOption.SetDefaultValue(16);
             paletteSizeOption.SetDefaultValue(8);
@@ -35,10 +42,14 @@ namespace SPT.Commands
             pixelateFactorOption.AddAlias("-f");
             colorToleranceOption.AddAlias("-t");
             paletteSizeOption.AddAlias("-ps");
+            effectsOption.AddAlias("-e");
+
+            effectsOption.AllowMultipleArgumentsPerToken = true;
 
             pixelateFactorOption.AddValidator(PixelateFactorValidator);
             colorToleranceOption.AddValidator(ColorToleranceValidator);
             paletteSizeOption.AddValidator(PaletteSizeValidator);
+            effectsOption.AddValidator(EffectsValidator);
 
             // ================================ //
             // Commands
@@ -47,6 +58,7 @@ namespace SPT.Commands
                 pixelateFactorOption,
                 paletteSizeOption,
                 colorToleranceOption,
+                effectsOption
             };
 
             command.SetHandler(Handler, pixelateFactorOption, paletteSizeOption, colorToleranceOption);
@@ -78,6 +90,7 @@ namespace SPT.Commands
                     PaletteSize = paletteSize,
                     ColorTolerance = colorTolerance,
                     CustomPalette = customPalette,
+                    Effects = [.. effects]
                 };
 
                 // Infos
@@ -176,6 +189,29 @@ namespace SPT.Commands
                 {
                     result.ErrorMessage = "Palette size must be greater than 0.";
                     return;
+                }
+            }
+
+            void EffectsValidator(OptionResult result)
+            {
+                if (result.Tokens.Count == 0)
+                {
+                    return;
+                }
+
+                string[] args = result.Tokens.Single().Value.Split(' ', StringSplitOptions.TrimEntries);
+
+                for (int i = 0; i < args.Length; i++)
+                {
+                    try
+                    {
+                        effects.Add(SPTEffectCollection.GetEffectByName(args[i]));
+                    }
+                    catch (Exception)
+                    {
+                        result.ErrorMessage = "Something went wrong while processing the effects passed as parameters.";
+                        return;
+                    }
                 }
             }
 
