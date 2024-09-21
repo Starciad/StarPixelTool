@@ -1,21 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<!-- HEADER -->
-	<PropertyGroup>
+	<PropertyGroup Label="Header">
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
-	<!-- GENERAL -->
-	<PropertyGroup>
-		<RootNamespace>SPT</RootNamespace>
+	<PropertyGroup Label="General">
+		<RootNamespace>SPT.CLI</RootNamespace>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<InvariantGlobalization>true</InvariantGlobalization>
 	</PropertyGroup>
 
-	<!-- PUBLISH -->
-	<PropertyGroup>
+	<PropertyGroup Label="Publish">
 		<PublishTrimmed>false</PublishTrimmed>
 		<PublishSingleFile>true</PublishSingleFile>
 		<PublishAot>false</PublishAot>
@@ -28,24 +25,16 @@
 		<Trimming>full</Trimming>
 	</PropertyGroup>
 
-	<!-- COMPILATION -->
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<PropertyGroup Label="Complication">
 		<DebugType>embedded</DebugType>
 		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DebugType>embedded</DebugType>
-		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-	</PropertyGroup>
-
-	<!-- SETTINGS -->
-	<ItemGroup>
+	<ItemGroup Label="Settings">
 		<Content Include="SPT_Icon.ico" />
 	</ItemGroup>
 
-	<!-- FILES -->
-	<ItemGroup>
+	<ItemGroup Label="Files">
 		<None Include="..\..\LICENSE.txt">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
@@ -61,16 +50,14 @@
 		</Content>
 	</ItemGroup>
 
-	<!-- DEPENDENCIES -->
-	<ItemGroup>
+	<ItemGroup Label="Package References">
 		<PackageReference Include="Figgle" Version="0.5.1" />
 		<PackageReference Include="MessagePack" Version="2.6.100-alpha" />
 		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
 		<PackageReference Include="System.CommandLine.Rendering" Version="0.4.0-alpha.22272.1" />
 	</ItemGroup>
 
-	<!-- PROJECTS -->
-	<ItemGroup>
+	<ItemGroup Label="Project References">
 		<ProjectReference Include="..\SPT.Core\SPT.Core.csproj" />
 	</ItemGroup>
 </Project>
