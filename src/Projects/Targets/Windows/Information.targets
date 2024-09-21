@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup Label="Package">
+		<Title>StarPixelTool</Title>
+		<Authors>Davi "Starciad" Fernandes</Authors>
+		<Company>Davi "Starciad" Fernandes</Company>
+		<Description>A tool for transforming and pixelating images.</Description>
+		<Copyright>Copyright © Davi "Starciad" Fernandes. All rights Reserved</Copyright>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/Starciad/StarPixelTool.git</PackageProjectUrl>
+		<PackageIcon>Icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/Starciad/StarPixelTool.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageReleaseNotes>https://github.com/Starciad/StarPixelTool/releases</PackageReleaseNotes>
+		<PackageTags>api; pixel-art; graphics; image-processing; dotnet-core;</PackageTags>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<PackageId>StarPixelTool</PackageId>
+		<Product>StarPixelTool</Product>
+	</PropertyGroup>	
+</Project>

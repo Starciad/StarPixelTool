@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup Label="compilation">
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<DefineConstants>OSX</DefineConstants>
+		<NoWarn>WFAC010</NoWarn>
+		<IncludeSymbols>True</IncludeSymbols>
+	</PropertyGroup>
+</Project>

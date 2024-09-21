@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../Targets/Windows/General.targets"></Import>
+	<Import Project="../Targets/Windows/Information.targets"></Import>
+	<Import Project="../Targets/Windows/Compilation.targets"></Import>
+	
+	<PropertyGroup Label="Header">
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Label="General">
+		<RootNamespace>SPT.CLI</RootNamespace>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<InvariantGlobalization>true</InvariantGlobalization>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Publish">
+		<PublishTrimmed>false</PublishTrimmed>
+		<PublishSingleFile>true</PublishSingleFile>
+		<PublishAot>false</PublishAot>
+		<PublishReadyToRun>true</PublishReadyToRun>
+		<TieredCompilation>true</TieredCompilation>
+		<UseWindowsForms>false</UseWindowsForms>
+		<UseWPF>false</UseWPF>
+		<StartupObject>SPT.Program</StartupObject>
+		<ApplicationIcon>SPT_Icon.ico</ApplicationIcon>
+		<Trimming>full</Trimming>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Complication">
+		<DebugType>embedded</DebugType>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	</PropertyGroup>
+
+	<ItemGroup Label="Files">
+		<None Include="..\..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<Content Include="Palettes\**">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<None Include="..\..\Assets\Graphics\SPT_Icon.ico">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup Label="Package References">
+		<PackageReference Include="Figgle" Version="0.5.1" />
+		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+		<PackageReference Include="System.CommandLine.Rendering" Version="0.4.0-alpha.22272.1" />
+	</ItemGroup>
+
+	<ItemGroup Label="Project References">
+	  <ProjectReference Include="..\SPT.Core\SPT.Core.Windows.csproj" />
+	</ItemGroup>
+</Project>

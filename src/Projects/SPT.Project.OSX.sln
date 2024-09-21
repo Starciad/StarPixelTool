@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPT.CLI.OSX", "SPT.CLI\SPT.CLI.OSX.csproj", "{DB37F6E3-5DF8-4863-AFFB-E690F6D5234A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPT.IO.OSX", "SPT.IO\SPT.IO.OSX.csproj", "{C26B9A57-514E-4717-B8C3-560B3B4E6872}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPT.Core.OSX", "SPT.Core\SPT.Core.OSX.csproj", "{24A8DEBA-757D-41D1-B039-2682916B076A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB37F6E3-5DF8-4863-AFFB-E690F6D5234A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB37F6E3-5DF8-4863-AFFB-E690F6D5234A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB37F6E3-5DF8-4863-AFFB-E690F6D5234A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB37F6E3-5DF8-4863-AFFB-E690F6D5234A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C26B9A57-514E-4717-B8C3-560B3B4E6872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C26B9A57-514E-4717-B8C3-560B3B4E6872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C26B9A57-514E-4717-B8C3-560B3B4E6872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C26B9A57-514E-4717-B8C3-560B3B4E6872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24A8DEBA-757D-41D1-B039-2682916B076A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A8DEBA-757D-41D1-B039-2682916B076A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24A8DEBA-757D-41D1-B039-2682916B076A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24A8DEBA-757D-41D1-B039-2682916B076A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

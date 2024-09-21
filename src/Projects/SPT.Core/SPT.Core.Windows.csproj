@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../Targets/Windows/General.targets"></Import>
+	<Import Project="../Targets/Windows/Information.targets"></Import>
+	<Import Project="../Targets/Windows/Compilation.targets"></Import>
+	
+	<PropertyGroup Label="Header">
+		<OutputType>Library</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Label="General">
+		<RootNamespace>SPT.Core</RootNamespace>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<InvariantGlobalization>true</InvariantGlobalization>
+		<DebugType>embedded</DebugType>
+		<IsTrimmable>True</IsTrimmable>
+	</PropertyGroup>
+
+	<ItemGroup Label="Files">
+		<None Include="..\..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\Assets\Graphics\SPT_Icon.ico">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup Label="Package References">
+		<PackageReference Include="MessagePack" Version="2.6.100-alpha" />
+		<PackageReference Include="SkiaSharp" Version="2.88.7" />
+		<PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="2.88.7" />
+	</ItemGroup>
+
+	<ItemGroup Label="Project References">
+	  <ProjectReference Include="..\SPT.IO\SPT.IO.Windows.csproj" />
+	</ItemGroup>
+</Project>

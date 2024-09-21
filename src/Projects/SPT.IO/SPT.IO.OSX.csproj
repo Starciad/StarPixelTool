@@ -5,7 +5,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="General">
-		<RootNamespace>SPT.Core</RootNamespace>
+		<RootNamespace>SPT.IO</RootNamespace>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -38,8 +38,8 @@
 			<PackagePath>\</PackagePath>
 		</None>
 		<None Include="..\..\LICENSE.txt">
-		  <Pack>True</Pack>
-		  <PackagePath>\</PackagePath>
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
 		</None>
 		<None Include="..\Assets\SPT_Icon.png">
 			<Pack>True</Pack>
@@ -53,9 +53,5 @@
 		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.7" />
 		<PackageReference Include="SkiaSharp.NativeAssets.macOS" Version="2.88.7" />
 		<PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="2.88.7" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\SPT.IO\SPT.IO.csproj" />
 	</ItemGroup>
 </Project>

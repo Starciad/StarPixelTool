@@ -1,4 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../../Targets/Windows/General.targets"></Import>
+	<Import Project="../../Targets/Windows/Information.targets"></Import>
+	<Import Project="../../Targets/Windows/Compilation.targets"></Import>
+	
 	<PropertyGroup Label="Header">
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net8.0-windows</TargetFramework>
@@ -12,29 +16,30 @@
 		<ApplicationIcon>SPT_Icon.ico</ApplicationIcon>
 	</PropertyGroup>
 
-	<ItemGroup Label="Settings">
-		<Content Include="SPT_Icon.ico" />
-	</ItemGroup>
-
 	<ItemGroup Label="Files">
-		<None Include="..\..\LICENSE.txt">
+		<None Include="..\..\..\..\LICENSE.txt">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\..\README.md">
+		<None Include="..\..\..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\..\Assets\Graphics\SPT_Icon.ico">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 
-	<ItemGroup Label="Dependencies">
+	<ItemGroup Label="Package References">
 		<PackageReference Include="SkiaSharp" Version="2.88.7" />
 		<PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="2.88.7" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\SPT.Core\SPT.Core.csproj" />
+	<ItemGroup Label="Project References">
+	  <ProjectReference Include="..\..\SPT.Core\SPT.Core.Windows.csproj" />
 	</ItemGroup>
 </Project>
