@@ -1,20 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<!-- HEADER -->
-	<PropertyGroup>
+	<PropertyGroup Label="Header">
 		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
-	<!-- GENERAL -->
-	<PropertyGroup>
+	<PropertyGroup Label="General">
 		<RootNamespace>SPT.Core</RootNamespace>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<InvariantGlobalization>true</InvariantGlobalization>
+		<DebugType>embedded</DebugType>
+		<IsTrimmable>True</IsTrimmable>
 	</PropertyGroup>
 
-	<!-- INFORMATIONS -->
-	<PropertyGroup>
+	<PropertyGroup Label="Informations">
 		<Title>StarPixelTool</Title>
 		<Version>1.0.0.0</Version>
 		<Authors>Starciad</Authors>
@@ -32,17 +31,8 @@
 		<IncludeSymbols>True</IncludeSymbols>
 		<PackageIcon>SPT_Icon.png</PackageIcon>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DebugType>embedded</DebugType>
-		<IsTrimmable>True</IsTrimmable>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DebugType>embedded</DebugType>
-		<IsTrimmable>True</IsTrimmable>
-	</PropertyGroup>
 
-	<!-- ASSETS -->
-	<ItemGroup>
+	<ItemGroup Label="Assets">
 		<None Include="..\..\README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
@@ -57,8 +47,7 @@
 		</None>
 	</ItemGroup>
 
-	<!-- DEPENDENCIES -->
-	<ItemGroup>
+	<ItemGroup Label="Dependencies">
 		<PackageReference Include="SkiaSharp" Version="2.88.7" />
 		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.7" />
 		<PackageReference Include="SkiaSharp.NativeAssets.macOS" Version="2.88.7" />
