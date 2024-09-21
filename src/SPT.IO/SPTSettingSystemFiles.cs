@@ -1,36 +1,35 @@
 ﻿using MessagePack;
 
-using SPT.Constants;
-using SPT.IO;
-using SPT.Models;
+using SPT.IO.Constants;
+using SPT.IO.Models;
 
 using System;
 using System.IO;
 
-namespace SPT.Managers
+namespace SPT.IO
 {
-    internal static class SPTSettingsManager
+    public static class SPTSettingSystemFiles
     {
-        internal static void Initialize()
+        public static void Initialize()
         {
-            EnsureSettingsFileExists(SPTFileConstants.FileSettings, () => new SPTFileSettings() { InputFilename = "a", OutputFilename = "b"});
+            EnsureSettingsFileExists(SPTFileConstants.FileSettings, () => new SPTFileSettings() { InputFilename = "a", OutputFilename = "b" });
             EnsureSettingsFileExists(SPTFileConstants.PaletteSettings, () => new SPTPalettesSettings());
         }
 
-        internal static void CreateFileSettings(SPTFileSettings value)
+        public static void CreateFileSettings(SPTFileSettings value)
         {
             CreateSettingsFile(value, SPTFileConstants.FileSettings);
         }
-        internal static void CreatePalettesSettings(SPTPalettesSettings value)
+        public static void CreatePalettesSettings(SPTPalettesSettings value)
         {
             CreateSettingsFile(value, SPTFileConstants.PaletteSettings);
         }
 
-        internal static SPTFileSettings GetFileSettings()
+        public static SPTFileSettings GetFileSettings()
         {
             return GetSettingsFromFile<SPTFileSettings>(SPTFileConstants.FileSettings);
         }
-        internal static SPTPalettesSettings GetPalettesSettings()
+        public static SPTPalettesSettings GetPalettesSettings()
         {
             return GetSettingsFromFile<SPTPalettesSettings>(SPTFileConstants.PaletteSettings);
         }

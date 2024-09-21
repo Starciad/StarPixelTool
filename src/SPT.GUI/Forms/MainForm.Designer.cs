@@ -33,15 +33,17 @@ namespace SPT.GUI
             this.mainToolStrip = new ToolStrip();
             this.fileToolStripDropDownButton = new ToolStripDropDownButton();
             this.openFileToolStripMenuItem = new ToolStripMenuItem();
+            this.closeFileToolStripMenuItem = new ToolStripMenuItem();
+            this.exitToolStripMenuItem = new ToolStripMenuItem();
             this.mainSplitContainer = new SplitContainer();
+            this.transformButton = new Button();
             this.renderingSplitContainer = new SplitContainer();
             this.sourceImgPictureBox = new PictureBox();
             this.previewImgPictureBox = new PictureBox();
             this.openImgFileDialog = new OpenFileDialog();
-            this.closeFileToolStripMenuItem = new ToolStripMenuItem();
-            this.exitToolStripMenuItem = new ToolStripMenuItem();
             this.mainToolStrip.SuspendLayout();
             ((ISupportInitialize)this.mainSplitContainer).BeginInit();
+            this.mainSplitContainer.Panel1.SuspendLayout();
             this.mainSplitContainer.Panel2.SuspendLayout();
             this.mainSplitContainer.SuspendLayout();
             ((ISupportInitialize)this.renderingSplitContainer).BeginInit();
@@ -75,22 +77,55 @@ namespace SPT.GUI
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new Size(180, 22);
+            this.openFileToolStripMenuItem.Size = new Size(103, 22);
             this.openFileToolStripMenuItem.Text = "Open";
             this.openFileToolStripMenuItem.Click += OpenFileToolStripMenuItem_Click;
             // 
+            // closeFileToolStripMenuItem
+            // 
+            this.closeFileToolStripMenuItem.Name = "closeFileToolStripMenuItem";
+            this.closeFileToolStripMenuItem.Size = new Size(103, 22);
+            this.closeFileToolStripMenuItem.Text = "Close";
+            this.closeFileToolStripMenuItem.Click += CloseFileToolStripMenuItem_Click;
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new Size(103, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
+            // 
             // mainSplitContainer
             // 
-            this.mainSplitContainer.Dock = DockStyle.Fill;
-            this.mainSplitContainer.Location = new Point(0, 0);
+            this.mainSplitContainer.Location = new Point(0, 28);
             this.mainSplitContainer.Name = "mainSplitContainer";
+            // 
+            // mainSplitContainer.Panel1
+            // 
+            this.mainSplitContainer.Panel1.AutoScroll = true;
+            this.mainSplitContainer.Panel1.Controls.Add(this.transformButton);
             // 
             // mainSplitContainer.Panel2
             // 
             this.mainSplitContainer.Panel2.Controls.Add(this.renderingSplitContainer);
-            this.mainSplitContainer.Size = new Size(1008, 729);
+            this.mainSplitContainer.Size = new Size(1008, 701);
             this.mainSplitContainer.SplitterDistance = 336;
             this.mainSplitContainer.TabIndex = 0;
+            // 
+            // transformButton
+            // 
+            this.transformButton.BackColor = Color.FromArgb(35, 134, 54);
+            this.transformButton.FlatAppearance.BorderColor = Color.FromArgb(57, 146, 75);
+            this.transformButton.FlatAppearance.BorderSize = 5;
+            this.transformButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            this.transformButton.ForeColor = Color.FromArgb(255, 247, 204);
+            this.transformButton.Location = new Point(11, 636);
+            this.transformButton.Name = "transformButton";
+            this.transformButton.Size = new Size(313, 53);
+            this.transformButton.TabIndex = 0;
+            this.transformButton.Text = "TRANSFORM";
+            this.transformButton.UseVisualStyleBackColor = false;
+            this.transformButton.Click += TransformButton_Click;
             // 
             // renderingSplitContainer
             // 
@@ -101,13 +136,15 @@ namespace SPT.GUI
             // 
             // renderingSplitContainer.Panel1
             // 
+            this.renderingSplitContainer.Panel1.AutoScroll = true;
             this.renderingSplitContainer.Panel1.Controls.Add(this.sourceImgPictureBox);
             // 
             // renderingSplitContainer.Panel2
             // 
+            this.renderingSplitContainer.Panel2.AutoScroll = true;
             this.renderingSplitContainer.Panel2.Controls.Add(this.previewImgPictureBox);
-            this.renderingSplitContainer.Size = new Size(668, 729);
-            this.renderingSplitContainer.SplitterDistance = 228;
+            this.renderingSplitContainer.Size = new Size(668, 701);
+            this.renderingSplitContainer.SplitterDistance = 229;
             this.renderingSplitContainer.TabIndex = 0;
             // 
             // sourceImgPictureBox
@@ -115,7 +152,7 @@ namespace SPT.GUI
             this.sourceImgPictureBox.Dock = DockStyle.Fill;
             this.sourceImgPictureBox.Location = new Point(0, 0);
             this.sourceImgPictureBox.Name = "sourceImgPictureBox";
-            this.sourceImgPictureBox.Size = new Size(668, 228);
+            this.sourceImgPictureBox.Size = new Size(668, 229);
             this.sourceImgPictureBox.TabIndex = 0;
             this.sourceImgPictureBox.TabStop = false;
             // 
@@ -124,7 +161,7 @@ namespace SPT.GUI
             this.previewImgPictureBox.Dock = DockStyle.Fill;
             this.previewImgPictureBox.Location = new Point(0, 0);
             this.previewImgPictureBox.Name = "previewImgPictureBox";
-            this.previewImgPictureBox.Size = new Size(668, 497);
+            this.previewImgPictureBox.Size = new Size(668, 468);
             this.previewImgPictureBox.TabIndex = 0;
             this.previewImgPictureBox.TabStop = false;
             // 
@@ -132,20 +169,6 @@ namespace SPT.GUI
             // 
             this.openImgFileDialog.FileName = "openFileDialog1";
             this.openImgFileDialog.Filter = "PNG Files (*.png)|*.png";
-            // 
-            // closeFileToolStripMenuItem
-            // 
-            this.closeFileToolStripMenuItem.Name = "closeFileToolStripMenuItem";
-            this.closeFileToolStripMenuItem.Size = new Size(180, 22);
-            this.closeFileToolStripMenuItem.Text = "Close";
-            this.closeFileToolStripMenuItem.Click += CloseFileToolStripMenuItem_Click;
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new Size(180, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -159,6 +182,7 @@ namespace SPT.GUI
             this.Text = "Star Pixel Tool";
             this.mainToolStrip.ResumeLayout(false);
             this.mainToolStrip.PerformLayout();
+            this.mainSplitContainer.Panel1.ResumeLayout(false);
             this.mainSplitContainer.Panel2.ResumeLayout(false);
             ((ISupportInitialize)this.mainSplitContainer).EndInit();
             this.mainSplitContainer.ResumeLayout(false);
@@ -184,5 +208,6 @@ namespace SPT.GUI
         private OpenFileDialog openImgFileDialog;
         private ToolStripMenuItem closeFileToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
+        private Button transformButton;
     }
 }

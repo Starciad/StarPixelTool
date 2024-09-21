@@ -1,9 +1,7 @@
-﻿using SPT.Core.Palettes;
-
-using System;
+﻿using System;
 using System.Linq;
 
-namespace SPT.Core.IO.Palettes
+namespace SPT.IO.Palettes
 {
     /// <summary>
     /// Provides functionality for checking and retrieving compatibility information for <see cref="SPTPalette"/> types.

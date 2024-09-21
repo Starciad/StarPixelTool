@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 
-namespace SPT.Models
+namespace SPT.IO.Models
 {
     [MessagePackObject]
     public struct SPTFileSettings

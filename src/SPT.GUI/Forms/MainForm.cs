@@ -1,8 +1,12 @@
+using SPT.Core.Palettes.Serializers;
+using SPT.Core.Palettes;
 using SPT.GUI.Managers;
 
 using System;
 using System.IO;
 using System.Windows.Forms;
+using SPT.Core;
+using System.Diagnostics;
 
 namespace SPT.GUI
 {
@@ -34,6 +38,43 @@ namespace SPT.GUI
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void TransformButton_Click(object sender, EventArgs e)
+        {
+            // Settings
+            SPTFileSettings fileSettings = SPTSettingsManager.GetFileSettings();
+            SPTPalettesSettings palettesSettings = SPTSettingsManager.GetPalettesSettings();
+
+            using FileStream inputFs = File.Open(fileSettings.InputFilename, FileMode.Open, FileAccess.Read);
+            using FileStream outputFs = File.Open(fileSettings.OutputFilename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+            // Palettes
+            SPTPalette customPalette = null;
+            if (!string.IsNullOrWhiteSpace(palettesSettings.DefinedPalette))
+            {
+                customPalette = SPTPaletteSerializer.Deserialize(Path.Combine(SPTDirectory.PalettesDirectory, palettesSettings.DefinedPalette));
+            }
+
+            // Pixelator
+            using SPTPixelator pixalator = new(inputFs, outputFs)
+            {
+                PixelateFactor = pixelateFactor,
+                PaletteSize = paletteSize,
+                ColorTolerance = colorTolerance,
+                CustomPalette = customPalette,
+                Effects = [.. effects]
+            };
+
+            // Infos
+            Stopwatch processStopwatch = new();
+            processStopwatch.Start();
+
+            pixalator.InitializePixelation();
+            pixalator.ExportPixelatedImage();
+
+            // Finish
+            processStopwatch.Stop();
         }
     }
 }

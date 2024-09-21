@@ -1,4 +1,4 @@
-﻿namespace SPT.Constants
+﻿namespace SPT.IO.Constants
 {
     internal static class SPTFileConstants
     {

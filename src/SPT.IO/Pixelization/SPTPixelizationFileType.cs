@@ -1,4 +1,4 @@
-﻿namespace SPT.Core.IO.Pixelization
+﻿namespace SPT.IO.Pixelization
 {
     /// <summary>
     /// Enumeration representing the type of file for compatibility checking, categorizing files as Unknown, Image, or Video.

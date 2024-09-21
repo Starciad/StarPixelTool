@@ -1,7 +1,7 @@
 ﻿using SPT.Core.IO.Palettes;
+using SPT.Core.Models;
 using SPT.IO;
 using SPT.Managers;
-using SPT.Models;
 using SPT.Terminal;
 
 using System;

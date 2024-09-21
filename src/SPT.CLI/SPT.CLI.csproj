@@ -52,7 +52,6 @@
 
 	<ItemGroup Label="Package References">
 		<PackageReference Include="Figgle" Version="0.5.1" />
-		<PackageReference Include="MessagePack" Version="2.6.100-alpha" />
 		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
 		<PackageReference Include="System.CommandLine.Rendering" Version="0.4.0-alpha.22272.1" />
 	</ItemGroup>

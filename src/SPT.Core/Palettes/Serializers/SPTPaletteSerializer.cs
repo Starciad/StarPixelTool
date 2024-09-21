@@ -1,4 +1,4 @@
-﻿using SPT.Core.IO.Palettes;
+﻿using SPT.IO.Palettes;
 
 using System;
 using System.IO;

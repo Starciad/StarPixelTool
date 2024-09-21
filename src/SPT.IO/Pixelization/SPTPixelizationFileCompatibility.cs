@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace SPT.Core.IO.Pixelization
+namespace SPT.IO.Pixelization
 {
     /// <summary>
     /// Utility class for checking file compatibility, determining file types, and handling common image and video file extensions.
