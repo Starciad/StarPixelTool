@@ -124,6 +124,8 @@ namespace SPT.Core
 
         private SKColor[] bitmapOutputColors = [];
 
+        private readonly Random random = new();
+
         #region System
         /// <summary>
         /// Initializes the pixelation process on the input image, creating a pixelated version.
@@ -195,27 +197,33 @@ namespace SPT.Core
             }
 
             List<SKColor> reducedColors = [];
-            for (int i = 1; i < this.bitmapOutputColors.Length && reducedColors.Count < this.paletteSize; i++)
-            {
-                SKColor currentColor = this.bitmapOutputColors[i];
-                bool isSimilarColor = false;
+            List<SKColor> colorsPool = [.. this.bitmapOutputColors];
 
-                foreach (SKColor paletteColor in reducedColors)
+            reducedColors.Add(GetMostCommonColor());
+
+            while (reducedColors.Count < this.paletteSize && colorsPool.Count > 0)
+            {
+                SKColor farthestColor = colorsPool[0];
+                double maxDistance = 0;
+
+                foreach (SKColor candidate in colorsPool)
                 {
-                    if (SPTColorMath.Difference(currentColor, paletteColor) < this.colorTolerance)
+                    double minDistanceToPalette = reducedColors.Min(existingColor =>
+                        SPTColorMath.Difference(existingColor, candidate)
+                    );
+
+                    if (minDistanceToPalette > maxDistance)
                     {
-                        isSimilarColor = true;
-                        break;
+                        maxDistance = minDistanceToPalette;
+                        farthestColor = candidate;
                     }
                 }
 
-                if (!isSimilarColor)
-                {
-                    reducedColors.Add(currentColor);
-                }
+                reducedColors.Add(farthestColor);
+                _ = colorsPool.Remove(farthestColor);
             }
 
-            // Reduce the number of colors present in the bitmap using the new, temporary palette.
+            // Apply the new reduced palette
             SPTPalette reducedPalette = new([.. reducedColors]);
             for (int y = 0; y < this.heightOutput; y++)
             {
@@ -225,6 +233,7 @@ namespace SPT.Core
                 }
             }
         }
+
         private void ApplyCustomPalette()
         {
             if (this.customPalette == null || this.customPalette.IsEmpty)
@@ -255,8 +264,33 @@ namespace SPT.Core
             int resizeWidth = (int)Math.Round(info.Width * this.upscaleFactor);
             int resizeHeight = (int)Math.Round(info.Height * this.upscaleFactor);
 
-            _ = info.WithSize(resizeWidth, resizeHeight);
-            _ = this.bitmapOutput.Resize(info, SKFilterQuality.High);
+            this.bitmapOutput = this.bitmapOutput.Resize(info.WithSize(resizeWidth, resizeHeight), SKFilterQuality.None);
+        }
+        #endregion
+
+        #region Tools
+        private SKColor GetMostCommonColor()
+        {
+            Dictionary<SKColor, int> colorFrequency = [];
+
+            for (int y = 0; y < this.heightOutput; y++)
+            {
+                for (int x = 0; x < this.widthOutput; x++)
+                {
+                    SKColor color = this.bitmapOutput.GetPixel(x, y);
+
+                    if (colorFrequency.ContainsKey(color))
+                    {
+                        colorFrequency[color]++;
+                    }
+                    else
+                    {
+                        colorFrequency[color] = 1;
+                    }
+                }
+            }
+
+            return colorFrequency.OrderByDescending(c => c.Value).First().Key;
         }
         #endregion
 
