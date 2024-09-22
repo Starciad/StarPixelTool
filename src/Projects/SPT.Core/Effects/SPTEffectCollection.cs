@@ -1,7 +1,6 @@
 ﻿using SPT.Core.Effects.Common;
 
 using System;
-using System.Collections.Generic;
 
 namespace SPT.Core.Effects
 {

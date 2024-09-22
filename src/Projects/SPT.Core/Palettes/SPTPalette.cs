@@ -3,7 +3,6 @@
 using SPT.Core.Colors;
 
 using System;
-using System.IO;
 
 namespace SPT.Core.Palettes
 {

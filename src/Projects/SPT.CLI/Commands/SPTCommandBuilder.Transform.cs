@@ -3,12 +3,9 @@
 using SPT.Core;
 using SPT.Core.Constants;
 using SPT.Core.Effects;
-using SPT.Core.Models;
 using SPT.Core.Palettes;
 using SPT.Core.Palettes.Serializers;
 using SPT.IO;
-using SPT.Managers;
-using SPT.Terminal;
 
 using System;
 using System.Collections.Generic;

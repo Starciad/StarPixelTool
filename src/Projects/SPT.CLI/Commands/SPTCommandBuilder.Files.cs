@@ -1,8 +1,4 @@
-﻿using SPT.Core.IO.Pixelization;
-using SPT.Managers;
-using SPT.Models;
-
-using System;
+﻿using System;
 using System.CommandLine;
 using System.CommandLine.Parsing;
 using System.IO;

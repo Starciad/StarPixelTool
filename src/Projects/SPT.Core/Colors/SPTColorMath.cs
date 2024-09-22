@@ -26,8 +26,8 @@ namespace SPT.Core.Colors
 
         public static int GetIntensityDifference(SKColor color1, SKColor color2)
         {
-            int intensity1 = (int)(color1.Red * 0.3 + color1.Green * 0.59 + color1.Blue * 0.11);
-            int intensity2 = (int)(color2.Red * 0.3 + color2.Green * 0.59 + color2.Blue * 0.11);
+            int intensity1 = (int)((color1.Red * 0.3) + (color1.Green * 0.59) + (color1.Blue * 0.11));
+            int intensity2 = (int)((color2.Red * 0.3) + (color2.Green * 0.59) + (color2.Blue * 0.11));
 
             return Math.Abs(intensity1 - intensity2);
         }

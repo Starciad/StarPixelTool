@@ -67,10 +67,7 @@ namespace SPT.Core
         public SPTPalette CustomPalette
         {
             get => this.customPalette;
-            set
-            {
-                this.customPalette = value;
-            }
+            set => this.customPalette = value;
         }
 
         /// <summary>
@@ -100,7 +97,7 @@ namespace SPT.Core
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("The upscale factor must be greater than or equal to 1.", nameof(UpscaleFactor));
+                    throw new ArgumentException("The upscale factor must be greater than or equal to 1.", nameof(this.UpscaleFactor));
                 }
 
                 this.upscaleFactor = value;
@@ -113,10 +110,7 @@ namespace SPT.Core
         public SPTEffect[] Effects
         {
             get => this.effects;
-            set
-            {
-                this.effects = value;
-            }
+            set => this.effects = value;
         }
 
         private SKBitmap bitmapInput;
@@ -268,21 +262,21 @@ namespace SPT.Core
         }
         private void ApplyEffects()
         {
-            for (int i = 0; i < effects.Length; i++)
+            for (int i = 0; i < this.effects.Length; i++)
             {
-                SPTEffect effect = effects[i];
+                SPTEffect effect = this.effects[i];
                 effect.ApplyEffect(this.bitmapOutput);
             }
         }
         private void ApplyUpscale()
         {
-            SKImageInfo info = bitmapOutput.Info;
+            SKImageInfo info = this.bitmapOutput.Info;
 
             int resizeWidth = (int)Math.Round(info.Width * this.upscaleFactor);
             int resizeHeight = (int)Math.Round(info.Height * this.upscaleFactor);
 
-            info.WithSize(resizeWidth, resizeHeight);
-            bitmapOutput.Resize(info, SKFilterQuality.High);
+            _ = info.WithSize(resizeWidth, resizeHeight);
+            _ = this.bitmapOutput.Resize(info, SKFilterQuality.High);
         }
         #endregion
 
@@ -296,14 +290,14 @@ namespace SPT.Core
                     ((IDisposable)this.bitmapInput).Dispose();
                     ((IDisposable)this.bitmapOutput).Dispose();
 
-                    inputFile.Close();
-                    outputFile.Close();
+                    this.bitmapInput = null;
+                    this.bitmapOutput = null;
                 }
 
                 this.disposedValue = true;
             }
         }
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             Dispose(disposing: true);
             GC.SuppressFinalize(this);

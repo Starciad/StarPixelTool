@@ -1,8 +1,4 @@
-﻿using SPT.Core.IO.Palettes;
-using SPT.Core.Models;
-using SPT.IO;
-using SPT.Managers;
-using SPT.Terminal;
+﻿using SPT.IO;
 
 using System;
 using System.Collections.Generic;

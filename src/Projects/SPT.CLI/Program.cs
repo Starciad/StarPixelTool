@@ -1,11 +1,10 @@
 ﻿using SPT.Commands;
-using SPT.Managers;
 
 using System;
 using System.CommandLine;
 using System.Text;
 
-namespace SPT
+namespace SPT.CLI
 {
     internal static class Program
     {

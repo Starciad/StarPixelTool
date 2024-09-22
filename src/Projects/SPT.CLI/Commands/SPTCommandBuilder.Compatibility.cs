@@ -1,8 +1,4 @@
-﻿using SPT.Core.IO.Palettes;
-using SPT.Core.IO.Pixelization;
-using SPT.Terminal;
-
-using System;
+﻿using System;
 using System.CommandLine;
 
 namespace SPT.Commands

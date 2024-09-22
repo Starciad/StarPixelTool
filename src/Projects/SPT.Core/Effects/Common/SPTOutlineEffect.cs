@@ -36,9 +36,9 @@ namespace SPT.Core.Effects.Common
                         intensityDifference += SPTColorMath.GetIntensityDifference(cColor, colors[i]);
                     }
 
-                    if (intensityDifference > power)
+                    if (intensityDifference > this.power)
                     {
-                        bitmap.SetPixel(x, y, color);
+                        bitmap.SetPixel(x, y, this.color);
                     }
                 }
             }
