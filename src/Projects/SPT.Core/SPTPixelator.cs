@@ -233,7 +233,6 @@ namespace SPT.Core
                 }
             }
         }
-
         private void ApplyCustomPalette()
         {
             if (this.customPalette == null || this.customPalette.IsEmpty)
@@ -260,11 +259,12 @@ namespace SPT.Core
         private void ApplyUpscale()
         {
             SKImageInfo info = this.bitmapOutput.Info;
-
             int resizeWidth = (int)Math.Round(info.Width * this.upscaleFactor);
             int resizeHeight = (int)Math.Round(info.Height * this.upscaleFactor);
 
-            this.bitmapOutput = this.bitmapOutput.Resize(info.WithSize(resizeWidth, resizeHeight), SKFilterQuality.None);
+            info = info.WithSize(resizeWidth, resizeHeight);
+
+            this.bitmapOutput = this.bitmapOutput.Resize(info, SKFilterQuality.None);
         }
         #endregion
 
@@ -279,14 +279,7 @@ namespace SPT.Core
                 {
                     SKColor color = this.bitmapOutput.GetPixel(x, y);
 
-                    if (colorFrequency.ContainsKey(color))
-                    {
-                        colorFrequency[color]++;
-                    }
-                    else
-                    {
-                        colorFrequency[color] = 1;
-                    }
+                    colorFrequency[color] = colorFrequency.TryGetValue(color, out int value) ? ++value : 1;
                 }
             }
 
