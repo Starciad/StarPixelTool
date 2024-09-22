@@ -21,11 +21,11 @@ namespace SPT.CLI
         private static FileStream inputFileStream;
         private static FileStream outputFileStream;
 
-        private static SPTPalette customPallet;
-
-        private static int pixelateFactor;
-        private static int paletteSize;
-        private static sbyte colorTolerance;
+        private static int pixelateFactor = 2;
+        private static int paletteSize = 32;
+        private static SPTPalette customPallet = null;
+        private static sbyte colorTolerance = 16;
+        private static int upscaleFactor = 1;
 
         [MTAThread]
         private static int Main(string[] args)
@@ -49,7 +49,7 @@ namespace SPT.CLI
         private static void ExecuteProgram(SPTArgumentParser parser)
         {
             // FILES
-            if (parser.HasOption("input") || parser.HasOption("i"))
+            if (parser.HasOption("input"))
             {
                 string inputFilename = parser.GetOption("input");
                 string inputFileExtension = Path.GetExtension(inputFilename);
@@ -81,20 +81,14 @@ namespace SPT.CLI
                 inputFileStream = File.Open(inputFilename, FileMode.Open, FileAccess.Read, FileShare.Read);
             }
 
-            if (parser.HasOption("output") || parser.HasOption("o"))
+            if (parser.HasOption("output"))
             {
                 string outputFilename = parser.GetOption("output");
                 string outputFileExtension = Path.GetExtension(outputFilename);
 
-                if (string.IsNullOrEmpty(outputFileExtension))
+                if (string.IsNullOrEmpty(outputFilename))
                 {
                     Console.WriteLine("No output file was specified.");
-                    Environment.Exit(1);
-                }
-
-                if (!File.Exists(outputFileExtension))
-                {
-                    Console.WriteLine("The output specified file does not exist.");
                     Environment.Exit(1);
                 }
 
@@ -114,9 +108,9 @@ namespace SPT.CLI
             }
 
             // PALLET
-            if (parser.HasOption("pallet") || parser.HasOption("p"))
+            if (parser.HasOption("customPallet"))
             {
-                string filename = parser.GetOption("pallet");
+                string filename = parser.GetOption("customPallet");
                 string fileExtension = Path.GetExtension(filename)?.ToLower();
 
                 if (!File.Exists(filename))
@@ -142,7 +136,7 @@ namespace SPT.CLI
 
             // TRANSFORM
             // Determines the intensity of pixelation. Must be a positive integer greater than 0.
-            if (parser.HasOption("pixelateFactor") || parser.HasOption("f"))
+            if (parser.HasOption("pixelateFactor"))
             {
                 if (int.TryParse(parser.GetOption("pixelateFactor"), out int value))
                 {
@@ -161,7 +155,7 @@ namespace SPT.CLI
             }
 
             // Defines the color variety in the output image. For custom palettes, this is automatically set to the palette's color count. Must be a positive integer greater than 0.
-            if (parser.HasOption("paletteSize") || parser.HasOption("ps"))
+            if (parser.HasOption("paletteSize"))
             {
                 if (int.TryParse(parser.GetOption("paletteSize"), out int value))
                 {
@@ -181,7 +175,7 @@ namespace SPT.CLI
             }
 
             // Controls the blending and unification of nearby colors during pixelation. Should be an integer between 0 and 255.
-            if (parser.HasOption("colorTolerance") || parser.HasOption("ct"))
+            if (parser.HasOption("colorTolerance"))
             {
                 if (!sbyte.TryParse(parser.GetOption("colorTolerance"), out sbyte value))
                 {
@@ -190,6 +184,26 @@ namespace SPT.CLI
                 }
 
                 colorTolerance = value;
+            }
+
+            //
+            if (parser.HasOption("upscaleFactor"))
+            {
+                if (int.TryParse(parser.GetOption("upscaleFactor"), out int value))
+                {
+                    if (value <= 0)
+                    {
+                        Console.WriteLine("Upscale factor must be greater than 0.");
+                        Environment.Exit(1);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Upscale factor value error.");
+                    Environment.Exit(1);
+                }
+
+                upscaleFactor = value;
             }
 
             StartPixalator();
@@ -204,6 +218,7 @@ namespace SPT.CLI
                 PaletteSize = paletteSize,
                 ColorTolerance = colorTolerance,
                 CustomPalette = customPallet,
+                UpscaleFactor = upscaleFactor,
                 // Effects = [.. effects]
             };
 
@@ -234,10 +249,8 @@ namespace SPT.CLI
             DisplayProcessingStep(ConsoleColor.Yellow, "Preparing application.");
             DisplayProcessingStep(ConsoleColor.Yellow, "Starting the pixelization process.");
 
-            #region [ PIXALATOR ]
             pixalator.InitializePixelation();
             pixalator.ExportPixelatedImage();
-            #endregion
 
             SPTTerminal.BreakLine();
             SPTTerminal.ApplyColor(ConsoleColor.Gray, "╚─━━━━━━░★░━━━━━━─╝");
@@ -262,6 +275,9 @@ namespace SPT.CLI
             SPTTerminal.BreakLine();
             SPTTerminal.BreakLine();
 
+            inputFileStream.Dispose();
+            outputFileStream.Dispose();
+
             // Special
             void DisplayProcessingStep(ConsoleColor color, string step)
             {
@@ -275,12 +291,6 @@ namespace SPT.CLI
                 SPTTerminal.ApplyColor(ConsoleColor.White, $"{label}: ");
                 Console.WriteLine(value);
             }
-        }
-
-        private static void ValidateInputAndOutputFile(string filename)
-        {
-            _ = Path.GetExtension(filename).ToLower();
-
         }
 
         // SPT is a utility that allows you to pixelate images, allowing you to apply dozens of different filters and settings.

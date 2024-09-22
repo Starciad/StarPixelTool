@@ -133,18 +133,6 @@ namespace SPT.Core
             StartPixelatorSystem();
             StartPixelationProcess();
         }
-
-        /// <summary>
-        /// Exports the pixelated image to the specified output file.
-        /// </summary>
-        /// <exception cref="IOException">Thrown if the export operation fails. Check the output file path and try again.</exception>
-        public void ExportPixelatedImage()
-        {
-            if (!this.bitmapOutput.Encode(outputFile, SKEncodedImageFormat.Png, default))
-            {
-                throw new IOException("Failed to export the pixelated image. Check the output file path and try again.");
-            }
-        }
         #endregion
 
         #region Processing
@@ -269,6 +257,20 @@ namespace SPT.Core
 
             _ = info.WithSize(resizeWidth, resizeHeight);
             _ = this.bitmapOutput.Resize(info, SKFilterQuality.High);
+        }
+        #endregion
+
+        #region EXPORT
+        /// <summary>
+        /// Exports the pixelated image to the specified output file.
+        /// </summary>
+        /// <exception cref="IOException">Thrown if the export operation fails. Check the output file path and try again.</exception>
+        public void ExportPixelatedImage()
+        {
+            if (!this.bitmapOutput.Encode(outputFile, SKEncodedImageFormat.Png, default))
+            {
+                throw new IOException("Failed to export the pixelated image. Check the output file path and try again.");
+            }
         }
         #endregion
 
