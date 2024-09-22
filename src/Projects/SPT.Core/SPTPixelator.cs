@@ -73,18 +73,10 @@ namespace SPT.Core
         /// <summary>
         ///
         /// </summary>
-        public float ColorTolerance
+        public sbyte ColorTolerance
         {
             get => this.colorTolerance;
-            set
-            {
-                if (value < 0 || value > 255)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value), "The color tolerance value must be a numeric value between 0 and 255.");
-                }
-
-                this.colorTolerance = value;
-            }
+            set => this.colorTolerance = value;
         }
 
         /// <summary>
@@ -126,7 +118,7 @@ namespace SPT.Core
         private int pixelateFactor = 16;
         private int paletteSize = 8;
         private SPTPalette customPalette;
-        private float colorTolerance = 16;
+        private sbyte colorTolerance = 16;
         private float upscaleFactor = 1;
         private SPTEffect[] effects = [];
 

@@ -1,6 +1,4 @@
-﻿using SPT.IO.Palettes;
-
-using System;
+﻿using System;
 using System.IO;
 
 namespace SPT.Core.Palettes.Serializers

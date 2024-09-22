@@ -1,4 +1,4 @@
-﻿namespace SPT.IO.Palettes
+﻿namespace SPT.Core.Palettes
 {
     /// <summary>
     /// Represents the types of SPTPalette formats.

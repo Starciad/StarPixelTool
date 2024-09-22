@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SPT.CLI.Terminal
+namespace SPT.CLI.Utilities
 {
     internal static class SPTTerminal
     {
