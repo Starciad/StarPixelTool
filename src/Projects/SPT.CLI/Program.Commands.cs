@@ -1,4 +1,6 @@
-﻿using SPT.CLI.Interactivity;
+﻿using SkiaSharp;
+
+using SPT.CLI.Interactivity;
 using SPT.Core.Enums;
 using SPT.Core.Palettes;
 using SPT.Core.Palettes.Serializers;
@@ -14,6 +16,8 @@ namespace SPT.CLI
     {
         private static void RegisterCommands()
         {
+            #region GENERAL
+
             commandRegistry.RegisterCommand(new SPTCommand(
                 "help",
                 "Displays available commands and their descriptions.",
@@ -25,6 +29,12 @@ namespace SPT.CLI
                 },
                 "h", "?"
             ));
+
+            #endregion
+
+            // =================== //
+
+            #region FILES
 
             commandRegistry.RegisterCommand(new SPTCommand(
                 "input",
@@ -94,6 +104,12 @@ namespace SPT.CLI
                 "o"
             ));
 
+            #endregion
+
+            // =================== //
+
+            #region COLOR PALETTE
+
             commandRegistry.RegisterCommand(new SPTCommand(
                 "customPallet",
                 "Specifies a custom color palette file. The file must exist and be in a supported format.",
@@ -125,6 +141,12 @@ namespace SPT.CLI
                 "pallet", "cp"
             ));
 
+            #endregion
+
+            // =================== //
+
+            #region TRANSFORM
+
             commandRegistry.RegisterCommand(new SPTCommand(
                 "pixelateFactor",
                 "Determines the intensity of pixelation. Must be a positive integer greater than 0.",
@@ -132,7 +154,7 @@ namespace SPT.CLI
                 {
                     if (!uint.TryParse(parser.GetOption("pixelateFactor"), out uint value) || value == 0)
                     {
-                        Console.WriteLine("Invalid value for pixelateFactor. It must be a positive integer.");
+                        Console.WriteLine("Invalid value for 'pixelateFactor'. It must be a positive integer.");
                         Environment.Exit(1);
                     }
 
@@ -148,7 +170,7 @@ namespace SPT.CLI
                 {
                     if (!uint.TryParse(parser.GetOption("paletteSize"), out uint value) || value == 0)
                     {
-                        Console.WriteLine("Invalid value for paletteSize. It must be a positive integer.");
+                        Console.WriteLine("Invalid value for 'paletteSize'. It must be a positive integer.");
                         Environment.Exit(1);
                     }
 
@@ -164,7 +186,7 @@ namespace SPT.CLI
                 {
                     if (!sbyte.TryParse(parser.GetOption("colorTolerance"), out sbyte value))
                     {
-                        Console.WriteLine("Invalid value for colorTolerance. It must be an integer between 0 and 255.");
+                        Console.WriteLine("Invalid value for 'colorTolerance'. It must be an integer between 0 and 255.");
                         Environment.Exit(1);
                     }
 
@@ -180,7 +202,7 @@ namespace SPT.CLI
                 {
                     if (!uint.TryParse(parser.GetOption("upscaleFactor"), out uint value) || value == 0)
                     {
-                        Console.WriteLine("Invalid value for upscaleFactor. It must be a positive integer.");
+                        Console.WriteLine("Invalid value for 'upscaleFactor'. It must be a positive integer.");
                         Environment.Exit(1);
                     }
 
@@ -217,6 +239,8 @@ namespace SPT.CLI
                 },
                 "cs", "space"
             ));
+
+            #endregion
         }
 
         private static void ExecuteCommands(SPTArgumentParser parser)

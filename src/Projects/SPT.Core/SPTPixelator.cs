@@ -122,14 +122,21 @@ namespace SPT.Core
 
         private bool disposedValue;
 
+        #region Settings
+        // Transform
         private uint pixelateFactor = 16;
-        private uint paletteSize = 8;
-        private SPTPalette customPalette = null;
         private sbyte colorTolerance = 16;
         private uint upscaleFactor = 1;
         private SPTColorSpaceType colorSpaceType = SPTColorSpaceType.RGB;
 
+        // Color Palette
+        private uint paletteSize = 8;
+        private SPTPalette customPalette = null;
+        #endregion
+
+        #region Cache
         private SKColor[] bitmapOutputColors = [];
+        #endregion
 
         /// <summary>
         /// Initializes the pixelation process on the input file, creating a pixelated version of the file.

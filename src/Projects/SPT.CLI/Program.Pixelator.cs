@@ -26,12 +26,15 @@ namespace SPT.CLI
         {
             return new SPTPixelator(inputFileStream, outputFileStream)
             {
+                // Transform
                 PixelateFactor = pixelateFactor,
-                PaletteSize = paletteSize,
                 ColorTolerance = colorTolerance,
-                CustomPalette = customPallet,
                 UpscaleFactor = upscaleFactor,
                 ColorSpaceType = colorSpaceType,
+
+                // Color Palette
+                PaletteSize = paletteSize,
+                CustomPalette = customPallet,
             };
         }
 
