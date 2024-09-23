@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SPT.CLI.Utilities
+namespace SPT.CLI.Interactivity
 {
     internal sealed class SPTArgument
     {
