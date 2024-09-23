@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 
 using SPT.Core.Colors;
+using SPT.Core.Enums;
 
 using System;
 
@@ -34,6 +35,11 @@ namespace SPT.Core.Palettes
         public SKColor[] Colors => colors;
 
         /// <summary>
+        /// Specifies the selected color space for color comparison.
+        /// </summary>
+        public SPTColorSpaceType SelectedColorSpace { get; set; } = SPTColorSpaceType.RGB;
+
+        /// <summary>
         /// Gets the closest color in the palette to the specified color.
         /// </summary>
         /// <param name="color">The <see cref="SKColor"/> to find the closest match for.</param>
@@ -52,12 +58,12 @@ namespace SPT.Core.Palettes
             else
             {
                 SKColor closestColor = this.Colors[0];
-                double minDifference = SPTColorMath.Difference(color, closestColor);
+                double minDifference = GetColorDifference(color, closestColor);
 
                 for (int i = 1; i < this.Size; i++)
                 {
                     SKColor currentColor = this.Colors[i];
-                    double currentDifference = SPTColorMath.Difference(color, currentColor);
+                    double currentDifference = GetColorDifference(color, currentColor);
 
                     if (currentDifference < minDifference)
                     {
@@ -68,6 +74,17 @@ namespace SPT.Core.Palettes
 
                 return closestColor;
             }
+        }
+
+        private double GetColorDifference(SKColor color1, SKColor color2)
+        {
+            return SelectedColorSpace switch
+            {
+                SPTColorSpaceType.RGB => SPTColorMath.DifferenceRGB(color1, color2),
+                SPTColorSpaceType.HSL => SPTColorMath.DifferenceHSL(color1, color2),
+                SPTColorSpaceType.HSV => SPTColorMath.DifferenceHSV(color1, color2),
+                _ => throw new NotSupportedException("Unsupported color space."),
+            };
         }
     }
 }

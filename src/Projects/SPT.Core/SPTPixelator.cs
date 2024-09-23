@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 
+using SPT.Core.Enums;
 using SPT.Core.Palettes;
 
 using System;
@@ -75,6 +76,15 @@ namespace SPT.Core
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public SPTColorSpaceType ColorSpaceType
+        {
+            get => this.colorSpaceType;
+            set => this.colorSpaceType = value;
+        }
+
         private readonly FileStream inputFileStream;
         private readonly FileStream outputFileStream;
 
@@ -88,11 +98,12 @@ namespace SPT.Core
 
         private bool disposedValue;
 
-        private uint pixelateFactor = 16;
-        private uint paletteSize = 8;
+        private uint pixelateFactor;
+        private uint paletteSize;
         private SPTPalette customPalette;
-        private sbyte colorTolerance = 16;
-        private uint upscaleFactor = 1;
+        private sbyte colorTolerance;
+        private uint upscaleFactor;
+        private SPTColorSpaceType colorSpaceType;
 
         private SKColor[] bitmapOutputColors = [];
 
@@ -116,6 +127,14 @@ namespace SPT.Core
             {
                 this.paletteSize = this.customPalette.Size;
             }
+
+            // Default
+            this.pixelateFactor = 16;
+            this.paletteSize = 8;
+            this.customPalette = null;
+            this.colorTolerance = 16;
+            this.upscaleFactor = 1;
+            this.colorSpaceType = SPTColorSpaceType.RGB;
         }
 
         /// <summary>

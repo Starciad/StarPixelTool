@@ -1,5 +1,9 @@
 ﻿using SkiaSharp;
 
+using SPT.Core.Colors;
+using SPT.Core.Enums;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,6 +26,17 @@ namespace SPT.Core
             }
 
             return colorFrequency.OrderByDescending(c => c.Value).First().Key;
+        }
+
+        private bool IsSimilarColor(SKColor color1, SKColor color2)
+        {
+            return this.colorSpaceType switch
+            {
+                SPTColorSpaceType.RGB => SPTColorMath.DifferenceRGB(color1, color2) < this.colorTolerance,
+                SPTColorSpaceType.HSL => SPTColorMath.DifferenceHSL(color1, color2) < this.colorTolerance,
+                SPTColorSpaceType.HSV => SPTColorMath.DifferenceHSV(color1, color2) < this.colorTolerance,
+                _ => throw new NotSupportedException("Unsupported color space."),
+            };
         }
     }
 }

@@ -15,13 +15,49 @@ namespace SPT.Core.Colors
         /// <param name="color1">The first <see cref="SKColor"/>.</param>
         /// <param name="color2">The second <see cref="SKColor"/>.</param>
         /// <returns>The Euclidean distance between the two colors in RGB space.</returns>
-        public static double Difference(SKColor color1, SKColor color2)
+        public static double DifferenceRGB(SKColor color1, SKColor color2)
         {
             double deltaR = color1.Red - color2.Red;
             double deltaG = color1.Green - color2.Green;
             double deltaB = color1.Blue - color2.Blue;
 
             return Math.Sqrt((deltaR * deltaR) + (deltaG * deltaG) + (deltaB * deltaB));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color1"></param>
+        /// <param name="color2"></param>
+        /// <returns></returns>
+        public static double DifferenceHSL(SKColor color1, SKColor color2)
+        {
+            color1.ToHsl(out float h1, out float s1, out float l1);
+            color2.ToHsl(out float h2, out float s2, out float l2);
+
+            float deltaH = h1 - h2;
+            float deltaS = s1 - s2;
+            float deltaL = l1 - l2;
+
+            return Math.Sqrt((deltaH * deltaH) + (deltaS * deltaS) + (deltaL * deltaL));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color1"></param>
+        /// <param name="color2"></param>
+        /// <returns></returns>
+        public static double DifferenceHSV(SKColor color1, SKColor color2)
+        {
+            color1.ToHsv(out float h1, out float s1, out float v1);
+            color2.ToHsv(out float h2, out float s2, out float v2);
+
+            float deltaH = h1 - h2;
+            float deltaS = s1 - s2;
+            float deltaV = v1 - v2;
+
+            return Math.Sqrt((deltaH * deltaH) + (deltaS * deltaS) + (deltaV * deltaV));
         }
 
         public static int GetIntensityDifference(SKColor color1, SKColor color2)

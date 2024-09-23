@@ -3,6 +3,7 @@
 using SPT.CLI.Utilities;
 using SPT.Core;
 using SPT.Core.Constants;
+using SPT.Core.Enums;
 using SPT.Core.Palettes;
 using SPT.Core.Palettes.Serializers;
 using SPT.Core.Pixelization;
@@ -26,6 +27,7 @@ namespace SPT.CLI
         private static SPTPalette customPallet = null;
         private static sbyte colorTolerance = 16;
         private static uint upscaleFactor = 1;
+        private static SPTColorSpaceType colorSpaceType = SPTColorSpaceType.RGB;
 
         [MTAThread]
         private static int Main(string[] args)
@@ -182,6 +184,30 @@ namespace SPT.CLI
                 upscaleFactor = value;
             }
 
+            //
+            if (parser.HasOption("colorSpaceType"))
+            {
+                switch (parser.GetOption("colorSpaceType").ToLower())
+                {
+                    case "rgb":
+                        colorSpaceType = SPTColorSpaceType.RGB;
+                        break;
+
+                    case "hsl":
+                        colorSpaceType = SPTColorSpaceType.HSL;
+                        break;
+
+                    case "hsv":
+                        colorSpaceType = SPTColorSpaceType.HSV;
+                        break;
+
+                    default:
+                        Console.WriteLine("Color space type value error.");
+                        Environment.Exit(1);
+                        break;
+                }
+            }
+
             StartPixalator();
         }
 
@@ -195,7 +221,7 @@ namespace SPT.CLI
                 ColorTolerance = colorTolerance,
                 CustomPalette = customPallet,
                 UpscaleFactor = upscaleFactor,
-                // Effects = [.. effects]
+                ColorSpaceType = colorSpaceType,
             };
 
             // Infos

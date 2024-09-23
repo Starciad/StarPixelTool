@@ -6,6 +6,7 @@ using SPT.Core.Palettes;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace SPT.Core
@@ -45,6 +46,7 @@ namespace SPT.Core
 
             this.bitmapOutputColors = [.. colors.Distinct()];
         }
+
         private void ApplyColorReduction()
         {
             if (this.paletteSize <= 0)
@@ -53,33 +55,28 @@ namespace SPT.Core
             }
 
             List<SKColor> reducedColors = [];
-            List<SKColor> colorsPool = [.. this.bitmapOutputColors];
-
             reducedColors.Add(GetMostCommonColor());
 
-            while (reducedColors.Count < this.paletteSize && colorsPool.Count > 0)
+            for (int i = 1; i < this.bitmapOutputColors.Length && reducedColors.Count < this.paletteSize; i++)
             {
-                SKColor farthestColor = colorsPool[0];
-                double maxDistance = 0;
+                SKColor currentColor = this.bitmapOutputColors[i];
+                bool isSimilarColor = false;
 
-                foreach (SKColor candidate in colorsPool)
+                foreach (SKColor paletteColor in reducedColors)
                 {
-                    double minDistanceToPalette = reducedColors.Min(existingColor =>
-                        SPTColorMath.Difference(existingColor, candidate)
-                    );
-
-                    if (minDistanceToPalette > maxDistance)
+                    if (IsSimilarColor(currentColor, paletteColor))
                     {
-                        maxDistance = minDistanceToPalette;
-                        farthestColor = candidate;
+                        isSimilarColor = true;
+                        break;
                     }
                 }
 
-                reducedColors.Add(farthestColor);
-                _ = colorsPool.Remove(farthestColor);
+                if (!isSimilarColor)
+                {
+                    reducedColors.Add(currentColor);
+                }
             }
 
-            // Apply the new reduced palette
             SPTPalette reducedPalette = new([.. reducedColors]);
             for (int y = 0; y < this.heightOutput; y++)
             {
@@ -89,6 +86,7 @@ namespace SPT.Core
                 }
             }
         }
+
         private void ApplyCustomPalette()
         {
             if (this.customPalette == null || this.customPalette.IsEmpty)
