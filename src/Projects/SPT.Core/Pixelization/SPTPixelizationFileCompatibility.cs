@@ -37,16 +37,6 @@ namespace SPT.Core.Pixelization
                 : IsImageExtension(extension) ? SPTPixelizationFileType.Image : IsVideoExtension(extension) ? SPTPixelizationFileType.Video : SPTPixelizationFileType.Unknown;
         }
 
-        private static bool IsImageExtension(string extension)
-        {
-            return Array.Exists(imageFileExtensions, x => x.Equals(extension, StringComparison.OrdinalIgnoreCase));
-        }
-
-        private static bool IsVideoExtension(string extension)
-        {
-            return Array.Exists(videoFileExtensions, x => x.Equals(extension, StringComparison.OrdinalIgnoreCase));
-        }
-
         /// <summary>
         /// Gets a string representing compatible file types for SPT pixelization along with their associated extensions.
         /// </summary>
@@ -64,6 +54,16 @@ namespace SPT.Core.Pixelization
             }
 
             return resultBuilder.ToString().TrimEnd();
+        }
+
+        private static bool IsImageExtension(string extension)
+        {
+            return Array.Exists(imageFileExtensions, x => x.Equals(extension, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private static bool IsVideoExtension(string extension)
+        {
+            return Array.Exists(videoFileExtensions, x => x.Equals(extension, StringComparison.OrdinalIgnoreCase));
         }
 
         private static string GetExtensionsLabel(SPTPixelizationFileType fileType)

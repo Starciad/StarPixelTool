@@ -10,7 +10,7 @@ namespace SPT.Core.Colors
     public static class SPTColorMath
     {
         /// <summary>
-        /// Calculates the color difference between two <see cref="SKColor"/> objects.
+        /// Calculates the color difference between two <see cref="SKColor"/> objects using the Euclidean distance in the RGB color space.
         /// </summary>
         /// <param name="color1">The first <see cref="SKColor"/>.</param>
         /// <param name="color2">The second <see cref="SKColor"/>.</param>
@@ -25,11 +25,11 @@ namespace SPT.Core.Colors
         }
 
         /// <summary>
-        /// 
+        /// Calculates the color difference between two <see cref="SKColor"/> objects in the HSL (Hue, Saturation, Lightness) color space.
         /// </summary>
-        /// <param name="color1"></param>
-        /// <param name="color2"></param>
-        /// <returns></returns>
+        /// <param name="color1">The first <see cref="SKColor"/>.</param>
+        /// <param name="color2">The second <see cref="SKColor"/>.</param>
+        /// <returns>The Euclidean distance between the two colors in HSL space.</returns>
         public static double DifferenceHSL(SKColor color1, SKColor color2)
         {
             color1.ToHsl(out float h1, out float s1, out float l1);
@@ -43,11 +43,11 @@ namespace SPT.Core.Colors
         }
 
         /// <summary>
-        /// 
+        /// Calculates the color difference between two <see cref="SKColor"/> objects in the HSV (Hue, Saturation, Value) color space.
         /// </summary>
-        /// <param name="color1"></param>
-        /// <param name="color2"></param>
-        /// <returns></returns>
+        /// <param name="color1">The first <see cref="SKColor"/>.</param>
+        /// <param name="color2">The second <see cref="SKColor"/>.</param>
+        /// <returns>The Euclidean distance between the two colors in HSV space.</returns>
         public static double DifferenceHSV(SKColor color1, SKColor color2)
         {
             color1.ToHsv(out float h1, out float s1, out float v1);
@@ -60,6 +60,12 @@ namespace SPT.Core.Colors
             return Math.Sqrt((deltaH * deltaH) + (deltaS * deltaS) + (deltaV * deltaV));
         }
 
+        /// <summary>
+        /// Calculates the difference in intensity between two <see cref="SKColor"/> objects based on their relative luminance.
+        /// </summary>
+        /// <param name="color1">The first <see cref="SKColor"/>.</param>
+        /// <param name="color2">The second <see cref="SKColor"/>.</param>
+        /// <returns>The absolute difference in intensity between the two colors.</returns>
         public static int GetIntensityDifference(SKColor color1, SKColor color2)
         {
             int intensity1 = (int)((color1.Red * 0.3) + (color1.Green * 0.59) + (color1.Blue * 0.11));

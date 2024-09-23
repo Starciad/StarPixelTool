@@ -34,6 +34,7 @@ namespace SPT.Core.Extensions
 
             return SKColors.Empty;
         }
+
         internal static (SKColor color, int x, int y)[] GetNeighboringColors(this SKBitmap bitmap, int x, int y)
         {
             List<(SKColor, int, int)> colors = [];
