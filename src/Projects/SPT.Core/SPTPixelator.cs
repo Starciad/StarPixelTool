@@ -16,7 +16,7 @@ namespace SPT.Core
     /// </remarks>
     /// <param name="inputFileStream"></param>
     /// <param name="outputFileStream"></param>
-    public sealed partial class SPTPixelator : IDisposable
+    public sealed partial class SPTPixelator(FileStream inputFileStream, FileStream outputFileStream) : IDisposable
     {
         /// <summary>
         ///
@@ -85,63 +85,34 @@ namespace SPT.Core
             set => this.colorSpaceType = value;
         }
 
-        private readonly FileStream inputFileStream;
-        private readonly FileStream outputFileStream;
+        private readonly FileStream inputFileStream = inputFileStream;
+        private readonly FileStream outputFileStream = outputFileStream;
 
         private SKBitmap bitmapInput;
         private SKBitmap bitmapOutput;
 
-        private readonly uint widthInput;
-        private readonly uint widthOutput;
-        private readonly uint heightInput;
-        private readonly uint heightOutput;
+        private uint widthInput;
+        private uint widthOutput;
+        private uint heightInput;
+        private uint heightOutput;
 
         private bool disposedValue;
 
-        private uint pixelateFactor;
-        private uint paletteSize;
-        private SPTPalette customPalette;
-        private sbyte colorTolerance;
-        private uint upscaleFactor;
-        private SPTColorSpaceType colorSpaceType;
+        private uint pixelateFactor = 16;
+        private uint paletteSize = 8;
+        private SPTPalette customPalette = null;
+        private sbyte colorTolerance = 16;
+        private uint upscaleFactor = 1;
+        private SPTColorSpaceType colorSpaceType = SPTColorSpaceType.RGB;
 
         private SKColor[] bitmapOutputColors = [];
-
-        public SPTPixelator(FileStream inputFileStream, FileStream outputFileStream)
-        {
-            // Streams
-            this.inputFileStream = inputFileStream;
-            this.outputFileStream = outputFileStream;
-
-            // Files
-            this.bitmapInput = SKBitmap.Decode(this.inputFileStream);
-            this.widthInput = (uint)this.bitmapInput.Width;
-            this.heightInput = (uint)this.bitmapInput.Height;
-
-            this.widthOutput = this.widthInput / this.pixelateFactor;
-            this.heightOutput = this.heightInput / this.pixelateFactor;
-            this.bitmapOutput = new SKBitmap((int)this.widthOutput, (int)this.heightOutput);
-
-            // Settings
-            if (this.HasCustomPalette)
-            {
-                this.paletteSize = this.customPalette.Size;
-            }
-
-            // Default
-            this.pixelateFactor = 16;
-            this.paletteSize = 8;
-            this.customPalette = null;
-            this.colorTolerance = 16;
-            this.upscaleFactor = 1;
-            this.colorSpaceType = SPTColorSpaceType.RGB;
-        }
 
         /// <summary>
         /// Initializes the pixelation process on the input image, creating a pixelated version.
         /// </summary>
         public void InitializePixelation()
         {
+            StartPixelationSystem();
             StartPixelationProcessRoutine();
         }
 
