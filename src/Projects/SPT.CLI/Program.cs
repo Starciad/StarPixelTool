@@ -26,8 +26,6 @@ namespace SPT.CLI
         private static SPTPalette customPallet = null;
         private static sbyte colorTolerance = 16;
         private static uint upscaleFactor = 1;
-        private static float smoothingFactor = 0.5f;
-        private static uint smoothingIterations = 3;
 
         [MTAThread]
         private static int Main(string[] args)

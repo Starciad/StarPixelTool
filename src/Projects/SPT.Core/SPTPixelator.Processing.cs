@@ -12,25 +12,7 @@ namespace SPT.Core
 {
     public sealed partial class SPTPixelator
     {
-        private void StartPixelatorSystem()
-        {
-            // Files
-            this.bitmapInput = SKBitmap.Decode(this.inputFileStream);
-            this.widthInput = (uint)this.bitmapInput.Width;
-            this.heightInput = (uint)this.bitmapInput.Height;
-
-            this.widthOutput = this.widthInput / this.pixelateFactor;
-            this.heightOutput = this.heightInput / this.pixelateFactor;
-            this.bitmapOutput = new SKBitmap((int)this.widthOutput, (int)this.heightOutput);
-
-            // Settings
-            if (this.HasCustomPalette)
-            {
-                this.paletteSize = this.customPalette.Size;
-            }
-        }
-
-        private void StartPixelationProcess()
+        private void StartPixelationProcessRoutine()
         {
             ApplyPixelation();
             ApplyColorReduction();

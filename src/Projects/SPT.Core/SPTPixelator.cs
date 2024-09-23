@@ -15,7 +15,7 @@ namespace SPT.Core
     /// </remarks>
     /// <param name="inputFileStream"></param>
     /// <param name="outputFileStream"></param>
-    public sealed partial class SPTPixelator(FileStream inputFileStream, FileStream outputFileStream) : IDisposable
+    public sealed partial class SPTPixelator : IDisposable
     {
         /// <summary>
         ///
@@ -75,16 +75,16 @@ namespace SPT.Core
             }
         }
 
-        private readonly FileStream inputFileStream = inputFileStream;
-        private readonly FileStream outputFileStream = outputFileStream;
+        private readonly FileStream inputFileStream;
+        private readonly FileStream outputFileStream;
 
         private SKBitmap bitmapInput;
         private SKBitmap bitmapOutput;
 
-        private uint widthInput;
-        private uint widthOutput;
-        private uint heightInput;
-        private uint heightOutput;
+        private readonly uint widthInput;
+        private readonly uint widthOutput;
+        private readonly uint heightInput;
+        private readonly uint heightOutput;
 
         private bool disposedValue;
 
@@ -96,15 +96,34 @@ namespace SPT.Core
 
         private SKColor[] bitmapOutputColors = [];
 
-        private readonly Random random = new();
+        public SPTPixelator(FileStream inputFileStream, FileStream outputFileStream)
+        {
+            // Streams
+            this.inputFileStream = inputFileStream;
+            this.outputFileStream = outputFileStream;
+
+            // Files
+            this.bitmapInput = SKBitmap.Decode(this.inputFileStream);
+            this.widthInput = (uint)this.bitmapInput.Width;
+            this.heightInput = (uint)this.bitmapInput.Height;
+
+            this.widthOutput = this.widthInput / this.pixelateFactor;
+            this.heightOutput = this.heightInput / this.pixelateFactor;
+            this.bitmapOutput = new SKBitmap((int)this.widthOutput, (int)this.heightOutput);
+
+            // Settings
+            if (this.HasCustomPalette)
+            {
+                this.paletteSize = this.customPalette.Size;
+            }
+        }
 
         /// <summary>
         /// Initializes the pixelation process on the input image, creating a pixelated version.
         /// </summary>
         public void InitializePixelation()
         {
-            StartPixelatorSystem();
-            StartPixelationProcess();
+            StartPixelationProcessRoutine();
         }
 
         private void Dispose(bool disposing)
