@@ -21,11 +21,13 @@ namespace SPT.CLI
         private static FileStream inputFileStream;
         private static FileStream outputFileStream;
 
-        private static int pixelateFactor = 2;
-        private static int paletteSize = 32;
+        private static uint pixelateFactor = 2;
+        private static uint paletteSize = 32;
         private static SPTPalette customPallet = null;
         private static sbyte colorTolerance = 16;
-        private static int upscaleFactor = 1;
+        private static uint upscaleFactor = 1;
+        private static float smoothingFactor = 0.5f;
+        private static uint smoothingIterations = 3;
 
         [MTAThread]
         private static int Main(string[] args)
@@ -138,15 +140,7 @@ namespace SPT.CLI
             // Determines the intensity of pixelation. Must be a positive integer greater than 0.
             if (parser.HasOption("pixelateFactor"))
             {
-                if (int.TryParse(parser.GetOption("pixelateFactor"), out int value))
-                {
-                    if (value <= 0)
-                    {
-                        Console.WriteLine("Pixelate factor must be greater than 0.");
-                        Environment.Exit(1);
-                    }
-                }
-                else
+                if (!uint.TryParse(parser.GetOption("pixelateFactor"), out uint value))
                 {
                     Console.WriteLine("Pixalate Factor value error.");
                 }
@@ -157,15 +151,7 @@ namespace SPT.CLI
             // Defines the color variety in the output image. For custom palettes, this is automatically set to the palette's color count. Must be a positive integer greater than 0.
             if (parser.HasOption("paletteSize"))
             {
-                if (int.TryParse(parser.GetOption("paletteSize"), out int value))
-                {
-                    if (value <= 0)
-                    {
-                        Console.WriteLine("Palette size must be greater than 0.");
-                        Environment.Exit(1);
-                    }
-                }
-                else
+                if (!uint.TryParse(parser.GetOption("paletteSize"), out uint value))
                 {
                     Console.WriteLine("Palette Size value error.");
                     Environment.Exit(1);
@@ -189,15 +175,7 @@ namespace SPT.CLI
             //
             if (parser.HasOption("upscaleFactor"))
             {
-                if (int.TryParse(parser.GetOption("upscaleFactor"), out int value))
-                {
-                    if (value <= 0)
-                    {
-                        Console.WriteLine("Upscale factor must be greater than 0.");
-                        Environment.Exit(1);
-                    }
-                }
-                else
+                if (!uint.TryParse(parser.GetOption("upscaleFactor"), out uint value))
                 {
                     Console.WriteLine("Upscale factor value error.");
                     Environment.Exit(1);

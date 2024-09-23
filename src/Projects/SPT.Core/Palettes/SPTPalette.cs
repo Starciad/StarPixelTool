@@ -26,7 +26,7 @@ namespace SPT.Core.Palettes
         /// <summary>
         /// Gets the size of the color palette.
         /// </summary>
-        public int Size => colors.Length;
+        public uint Size => (uint)colors.Length;
 
         /// <summary>
         /// Gets the array of <see cref="SKColor"/> objects representing the color palette.
