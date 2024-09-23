@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="General">
+		<AssemblyName>StarPixelTool</AssemblyName>
 		<RootNamespace>SPT.CLI</RootNamespace>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
@@ -25,6 +26,7 @@
 		<UseWindowsForms>false</UseWindowsForms>
 		<UseWPF>false</UseWPF>
 		<ApplicationIcon>..\..\Assets\Graphics\SPT_Icon.ico</ApplicationIcon>
+		<IsTrimmable>True</IsTrimmable>
 		<Trimming>full</Trimming>
 	</PropertyGroup>
 

@@ -1,10 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../Targets/Linux/General.targets"></Import>
+	<Import Project="../Targets/Linux/Information.targets"></Import>
+	<Import Project="../Targets/Linux/Compilation.targets"></Import>
+	
 	<PropertyGroup Label="Header">
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup Label="General">
+		<AssemblyName>StarPixelTool</AssemblyName>
 		<RootNamespace>SPT.CLI</RootNamespace>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
@@ -20,8 +25,8 @@
 		<TieredCompilation>true</TieredCompilation>
 		<UseWindowsForms>false</UseWindowsForms>
 		<UseWPF>false</UseWPF>
-		<StartupObject>SPT.Program</StartupObject>
-		<ApplicationIcon>SPT_Icon.ico</ApplicationIcon>
+		<ApplicationIcon>..\..\Assets\Graphics\SPT_Icon.ico</ApplicationIcon>
+		<IsTrimmable>True</IsTrimmable>
 		<Trimming>full</Trimming>
 	</PropertyGroup>
 
@@ -30,17 +35,13 @@
 		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
 	</PropertyGroup>
 
-	<ItemGroup Label="Settings">
-		<Content Include="SPT_Icon.ico" />
-	</ItemGroup>
-
 	<ItemGroup Label="Files">
-		<None Include="..\..\LICENSE.txt">
+		<None Include="..\..\..\LICENSE.txt">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\..\README.md">
+		<None Include="..\..\..\README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -48,15 +49,18 @@
 		<Content Include="Palettes\**">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<None Include="..\..\Assets\Graphics\SPT_Icon.ico">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup Label="Package References">
 		<PackageReference Include="Figgle" Version="0.5.1" />
-		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
-		<PackageReference Include="System.CommandLine.Rendering" Version="0.4.0-alpha.22272.1" />
 	</ItemGroup>
 
 	<ItemGroup Label="Project References">
-		<ProjectReference Include="..\SPT.Core\SPT.Core.csproj" />
+	  <ProjectReference Include="..\SPT.Core\SPT.Core.Linux.csproj" />
 	</ItemGroup>
 </Project>

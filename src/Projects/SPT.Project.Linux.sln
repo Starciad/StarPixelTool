@@ -3,19 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPT.CLI.Linux", "SPT.CLI\SPT.CLI.Linux.csproj", "{234BEE47-A227-48AB-A6B1-508CC62B367E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPT.CLI.Linux", "SPT.CLI\SPT.CLI.Linux.csproj", "{234BEE47-A227-48AB-A6B1-508CC62B367E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPT.Core.Linux", "SPT.Core\SPT.Core.Linux.csproj", "{65683312-9524-435F-99D6-EE5299537600}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPT.IO.Linux", "SPT.IO\SPT.IO.Linux.csproj", "{5FFFB064-292D-4821-A42F-EEF82921B199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPT.Core.Linux", "SPT.Core\SPT.Core.Linux.csproj", "{65683312-9524-435F-99D6-EE5299537600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{234BEE47-A227-48AB-A6B1-508CC62B367E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -26,9 +21,8 @@ Global
 		{65683312-9524-435F-99D6-EE5299537600}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65683312-9524-435F-99D6-EE5299537600}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65683312-9524-435F-99D6-EE5299537600}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FFFB064-292D-4821-A42F-EEF82921B199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FFFB064-292D-4821-A42F-EEF82921B199}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FFFB064-292D-4821-A42F-EEF82921B199}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FFFB064-292D-4821-A42F-EEF82921B199}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

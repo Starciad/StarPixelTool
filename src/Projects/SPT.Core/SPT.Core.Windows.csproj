@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="General">
+		<AssemblyName>StarPixelTool.Core</AssemblyName>
 		<RootNamespace>SPT.Core</RootNamespace>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
@@ -16,6 +17,7 @@
 		<InvariantGlobalization>true</InvariantGlobalization>
 		<DebugType>embedded</DebugType>
 		<IsTrimmable>True</IsTrimmable>
+		<Trimming>full</Trimming>
 	</PropertyGroup>
 
 	<ItemGroup Label="Files">
