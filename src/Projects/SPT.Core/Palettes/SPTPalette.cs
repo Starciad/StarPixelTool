@@ -78,7 +78,7 @@ namespace SPT.Core.Palettes
 
         private double GetColorDifference(SKColor color1, SKColor color2)
         {
-            return SelectedColorSpace switch
+            return this.SelectedColorSpace switch
             {
                 SPTColorSpaceType.RGB => SPTColorMath.DifferenceRGB(color1, color2),
                 SPTColorSpaceType.HSL => SPTColorMath.DifferenceHSL(color1, color2),

@@ -47,8 +47,9 @@ namespace SPT.CLI
             Console.WriteLine();
             Console.WriteLine("SPT is a utility that allows you to pixelate images, allowing you to apply dozens of different filters and settings.");
             Console.WriteLine();
-            SPTTerminal.BreakLine();
             Console.WriteLine(line);
+            Console.WriteLine();
+            Console.WriteLine("Use the '--help' or '-h' command for more details on what can be done!");
         }
 
         private static Stopwatch StartProcessingTimer()

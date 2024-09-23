@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SPT.CLI.Utilities;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,10 +26,14 @@ namespace SPT.CLI.Interactivity
 
         public void DisplayHelp()
         {
-            Console.WriteLine("Available commands:");
+            Console.WriteLine("Below you can find a detailed list containing all the commands and arguments that can be used in the program.");
+            Console.WriteLine();
+
             foreach (SPTCommand command in this._commands.Values.Distinct())
             {
-                Console.WriteLine($"{command.Name}: {command.Description}");
+                SPTTerminal.ApplyColor(ConsoleColor.Green, $"> --{command.Name} ({string.Join(", ", command.Aliases.Select(x => x))}): ");
+                Console.Write($"{command.Description}");
+                Console.WriteLine();
             }
         }
     }

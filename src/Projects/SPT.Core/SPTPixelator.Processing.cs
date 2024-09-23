@@ -1,12 +1,10 @@
 ﻿using SkiaSharp;
 
-using SPT.Core.Colors;
 using SPT.Core.Extensions;
 using SPT.Core.Palettes;
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 namespace SPT.Core

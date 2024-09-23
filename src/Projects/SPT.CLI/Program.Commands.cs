@@ -19,6 +19,7 @@ namespace SPT.CLI
                 "Displays available commands and their descriptions.",
                 parser =>
                 {
+                    DisplayTitleInfo();
                     commandRegistry.DisplayHelp();
                     Environment.Exit(0);
                 },

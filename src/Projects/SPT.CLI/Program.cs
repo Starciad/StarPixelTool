@@ -30,9 +30,16 @@ namespace SPT.CLI
 
             SPTArgumentParser parser = new(args);
 
-            RegisterCommands();
-            ExecuteCommands(parser);
-            StartPixalator();
+            if (args.Length == 0)
+            {
+                DisplayTitleInfo();
+            }
+            else
+            {
+                RegisterCommands();
+                ExecuteCommands(parser);
+                StartPixalator();
+            }
 
             return 0;
         }
