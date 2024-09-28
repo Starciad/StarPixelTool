@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../Targets/OSX/General.targets"></Import>
-	<Import Project="../Targets/OSX/Information.targets"></Import>
-	<Import Project="../Targets/OSX/Compilation.targets"></Import>
+	<Import Project="../../Targets/OSX/General.targets"></Import>
+	<Import Project="../../Targets/OSX/Information.targets"></Import>
+	<Import Project="../../Targets/OSX/Compilation.targets"></Import>
 	
 	<PropertyGroup Label="Header">
 		<OutputType>Exe</OutputType>

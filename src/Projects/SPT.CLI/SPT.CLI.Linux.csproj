@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../Targets/Linux/General.targets"></Import>
-	<Import Project="../Targets/Linux/Information.targets"></Import>
-	<Import Project="../Targets/Linux/Compilation.targets"></Import>
+	<Import Project="../../Targets/Linux/General.targets"></Import>
+	<Import Project="../../Targets/Linux/Information.targets"></Import>
+	<Import Project="../../Targets/Linux/Compilation.targets"></Import>
 	
 	<PropertyGroup Label="Header">
 		<OutputType>Exe</OutputType>

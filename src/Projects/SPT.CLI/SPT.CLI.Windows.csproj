@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../Targets/Windows/General.targets"></Import>
-	<Import Project="../Targets/Windows/Information.targets"></Import>
-	<Import Project="../Targets/Windows/Compilation.targets"></Import>
+	<Import Project="../../Targets/Windows/General.targets"></Import>
+	<Import Project="../../Targets/Windows/Information.targets"></Import>
+	<Import Project="../../Targets/Windows/Compilation.targets"></Import>
 	
 	<PropertyGroup Label="Header">
 		<OutputType>Exe</OutputType>
